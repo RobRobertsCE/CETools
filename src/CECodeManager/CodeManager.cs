@@ -1,4 +1,5 @@
 ﻿using BranchVersionLibrary;
+using CECodeManager.Dialogs;
 using CECodeManager.Models;
 using CECodeManager.Properties;
 using DbVersionLibrary;
@@ -1122,6 +1123,28 @@ namespace CECodeManager
             return false;
         }
 
+
+        #endregion
+
+        #region accounts
+        private void accountsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DisplayAccountsForm();
+        }
+
+        private void DisplayAccountsForm()
+        {
+            try
+            {
+                var dialog = new AccountsDialog();
+                var result = dialog.ShowDialog(this);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+        }
 
         #endregion
     }

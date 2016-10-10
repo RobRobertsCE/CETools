@@ -65,11 +65,20 @@
     <Compile Include="CodeManager.Designer.cs">
       <DependentUpon>CodeManager.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\AccountsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\AccountsDialog.Designer.cs">
+      <DependentUpon>AccountsDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\WorkItemView.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CodeManager.resx">
       <DependentUpon>CodeManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\AccountsDialog.resx">
+      <DependentUpon>AccountsDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -99,6 +108,10 @@
     <ProjectReference Include="..\BranchVersionLibrary\BranchVersionLibrary.csproj">
       <Project>{6649af5d-6f7d-4d93-9cf5-e5298188d0c3}</Project>
       <Name>BranchVersionLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CETools\CETools.csproj">
+      <Project>{3765d107-6c6c-4039-b733-b21d5ffdcd94}</Project>
+      <Name>CETools</Name>
     </ProjectReference>
     <ProjectReference Include="..\DbVersionLibrary\DbVersionLibrary.csproj">
       <Project>{b91c1cc3-4e04-4abb-92d6-159c4579bf8e}</Project>

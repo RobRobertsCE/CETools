@@ -43,6 +43,9 @@
             this.buildDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.changedFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
+            this.updateJIRAPropertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateCommitPropertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.branchMonitorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -62,6 +65,9 @@
             this.columnHeader23 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader24 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader25 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader26 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader27 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.gitHubGridImages = new System.Windows.Forms.ImageList(this.components);
             this.pnlGitHub = new System.Windows.Forms.Panel();
             this.btnShowHideGridOptions = new System.Windows.Forms.Button();
             this.pnlGridOptions = new System.Windows.Forms.Panel();
@@ -152,12 +158,8 @@
             this.label13 = new System.Windows.Forms.Label();
             this.pnlTabControl = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.columnHeader26 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader27 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.gitHubGridImages = new System.Windows.Forms.ImageList(this.components);
-            this.updateJIRAPropertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
-            this.updateCommitPropertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.accountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.pnlGitHub.SuspendLayout();
@@ -236,14 +238,14 @@
             // refreshToolStripMenuItem
             // 
             this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.refreshToolStripMenuItem.Text = "Refresh Pull Requests";
             this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(206, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(210, 6);
             // 
             // pullRequestGridOptionsToolStripMenuItem
             // 
@@ -251,14 +253,14 @@
             this.pullRequestGridOptionsToolStripMenuItem.CheckOnClick = true;
             this.pullRequestGridOptionsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.pullRequestGridOptionsToolStripMenuItem.Name = "pullRequestGridOptionsToolStripMenuItem";
-            this.pullRequestGridOptionsToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.pullRequestGridOptionsToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.pullRequestGridOptionsToolStripMenuItem.Text = "Pull Request Grid Options";
             this.pullRequestGridOptionsToolStripMenuItem.CheckedChanged += new System.EventHandler(this.pullRequestGridOptionsToolStripMenuItem_CheckedChanged);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(206, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(210, 6);
             // 
             // teamCityBuildsToolStripMenuItem
             // 
@@ -266,7 +268,7 @@
             this.teamCityBuildsToolStripMenuItem.CheckOnClick = true;
             this.teamCityBuildsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.teamCityBuildsToolStripMenuItem.Name = "teamCityBuildsToolStripMenuItem";
-            this.teamCityBuildsToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.teamCityBuildsToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.teamCityBuildsToolStripMenuItem.Text = "Team City Builds";
             this.teamCityBuildsToolStripMenuItem.CheckedChanged += new System.EventHandler(this.teamCityBuildsToolStripMenuItem_CheckedChanged);
             // 
@@ -276,14 +278,14 @@
             this.buildDetailsToolStripMenuItem.CheckOnClick = true;
             this.buildDetailsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.buildDetailsToolStripMenuItem.Name = "buildDetailsToolStripMenuItem";
-            this.buildDetailsToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.buildDetailsToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.buildDetailsToolStripMenuItem.Text = "Build Details";
             this.buildDetailsToolStripMenuItem.CheckedChanged += new System.EventHandler(this.buildDetailsToolStripMenuItem_CheckedChanged);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(206, 6);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(210, 6);
             // 
             // changedFilesToolStripMenuItem
             // 
@@ -291,16 +293,37 @@
             this.changedFilesToolStripMenuItem.CheckOnClick = true;
             this.changedFilesToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.changedFilesToolStripMenuItem.Name = "changedFilesToolStripMenuItem";
-            this.changedFilesToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.changedFilesToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.changedFilesToolStripMenuItem.Text = "Changed Files";
             this.changedFilesToolStripMenuItem.CheckedChanged += new System.EventHandler(this.changedFilesToolStripMenuItem_CheckedChanged);
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(210, 6);
+            // 
+            // updateJIRAPropertiesToolStripMenuItem
+            // 
+            this.updateJIRAPropertiesToolStripMenuItem.Name = "updateJIRAPropertiesToolStripMenuItem";
+            this.updateJIRAPropertiesToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.updateJIRAPropertiesToolStripMenuItem.Text = "Update JIRA properties";
+            this.updateJIRAPropertiesToolStripMenuItem.Click += new System.EventHandler(this.updateJIRAPropertiesToolStripMenuItem_Click);
+            // 
+            // updateCommitPropertiesToolStripMenuItem
+            // 
+            this.updateCommitPropertiesToolStripMenuItem.Name = "updateCommitPropertiesToolStripMenuItem";
+            this.updateCommitPropertiesToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.updateCommitPropertiesToolStripMenuItem.Text = "Update commit properties";
+            this.updateCommitPropertiesToolStripMenuItem.Click += new System.EventHandler(this.updateCommitPropertiesToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.branchMonitorToolStripMenuItem});
+            this.branchMonitorToolStripMenuItem,
+            this.toolStripMenuItem6,
+            this.accountsToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.toolsToolStripMenuItem.Text = "&Tools";
             // 
             // branchMonitorToolStripMenuItem
@@ -472,6 +495,27 @@
             // 
             this.columnHeader25.Text = "JIRA Status";
             this.columnHeader25.Width = 100;
+            // 
+            // columnHeader26
+            // 
+            this.columnHeader26.Text = "DB Script";
+            this.columnHeader26.Width = 80;
+            // 
+            // columnHeader27
+            // 
+            this.columnHeader27.Text = "Build Script";
+            this.columnHeader27.Width = 75;
+            // 
+            // gitHubGridImages
+            // 
+            this.gitHubGridImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("gitHubGridImages.ImageStream")));
+            this.gitHubGridImages.TransparentColor = System.Drawing.Color.Transparent;
+            this.gitHubGridImages.Images.SetKeyName(0, "BreakpointEnabled_6584_16x.png");
+            this.gitHubGridImages.Images.SetKeyName(1, "Security_Shields_Critical_32xSM_color.png");
+            this.gitHubGridImages.Images.SetKeyName(2, "Security_Shields_Alert_32xSM_color.png");
+            this.gitHubGridImages.Images.SetKeyName(3, "StatusAnnotations_Alert_32xSM_color.png");
+            this.gitHubGridImages.Images.SetKeyName(4, "StatusAnnotations_Warning_32xSM_color.png");
+            this.gitHubGridImages.Images.SetKeyName(5, "Security_Shields_Complete_and_ok_32xSM_color.png");
             // 
             // pnlGitHub
             // 
@@ -1407,45 +1451,17 @@
             this.splitter1.TabIndex = 9;
             this.splitter1.TabStop = false;
             // 
-            // columnHeader26
+            // accountsToolStripMenuItem
             // 
-            this.columnHeader26.Text = "DB Script";
-            this.columnHeader26.Width = 80;
+            this.accountsToolStripMenuItem.Name = "accountsToolStripMenuItem";
+            this.accountsToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.accountsToolStripMenuItem.Text = "Accounts";
+            this.accountsToolStripMenuItem.Click += new System.EventHandler(this.accountsToolStripMenuItem_Click);
             // 
-            // columnHeader27
+            // toolStripMenuItem6
             // 
-            this.columnHeader27.Text = "Build Script";
-            this.columnHeader27.Width = 75;
-            // 
-            // gitHubGridImages
-            // 
-            this.gitHubGridImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("gitHubGridImages.ImageStream")));
-            this.gitHubGridImages.TransparentColor = System.Drawing.Color.Transparent;
-            this.gitHubGridImages.Images.SetKeyName(0, "BreakpointEnabled_6584_16x.png");
-            this.gitHubGridImages.Images.SetKeyName(1, "Security_Shields_Critical_32xSM_color.png");
-            this.gitHubGridImages.Images.SetKeyName(2, "Security_Shields_Alert_32xSM_color.png");
-            this.gitHubGridImages.Images.SetKeyName(3, "StatusAnnotations_Alert_32xSM_color.png");
-            this.gitHubGridImages.Images.SetKeyName(4, "StatusAnnotations_Warning_32xSM_color.png");
-            this.gitHubGridImages.Images.SetKeyName(5, "Security_Shields_Complete_and_ok_32xSM_color.png");
-            // 
-            // updateJIRAPropertiesToolStripMenuItem
-            // 
-            this.updateJIRAPropertiesToolStripMenuItem.Name = "updateJIRAPropertiesToolStripMenuItem";
-            this.updateJIRAPropertiesToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
-            this.updateJIRAPropertiesToolStripMenuItem.Text = "Update JIRA properties";
-            this.updateJIRAPropertiesToolStripMenuItem.Click += new System.EventHandler(this.updateJIRAPropertiesToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem5
-            // 
-            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(206, 6);
-            // 
-            // updateCommitPropertiesToolStripMenuItem
-            // 
-            this.updateCommitPropertiesToolStripMenuItem.Name = "updateCommitPropertiesToolStripMenuItem";
-            this.updateCommitPropertiesToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
-            this.updateCommitPropertiesToolStripMenuItem.Text = "Update commit properties";
-            this.updateCommitPropertiesToolStripMenuItem.Click += new System.EventHandler(this.updateCommitPropertiesToolStripMenuItem_Click);
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(154, 6);
             // 
             // CodeManager
             // 
@@ -1627,6 +1643,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem updateJIRAPropertiesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateCommitPropertiesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
+        private System.Windows.Forms.ToolStripMenuItem accountsToolStripMenuItem;
     }
 }
 
