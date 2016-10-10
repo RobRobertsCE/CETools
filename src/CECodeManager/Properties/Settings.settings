@@ -5,5 +5,14 @@
     <Setting Name="ActiveRepoList" Type="System.String" Scope="User">
       <Value Profile="(Default)">["Advantage","AdvantageCustomReports","AdvantageWeb","AdvantageCreditCards","AdvantageShared","AdvantageDiscountBase","AdvantageRelay","AdvantageWebAdmin","AdvantageSales","AdvantageTaxes", "CenterEdgeSiteInfo"]</Value>
     </Setting>
+    <Setting Name="GitHubToken" Type="System.String" Scope="User">
+      <Value Profile="(Default)">430daefd30be5773170211b938dcaa127786b424</Value>
+    </Setting>
+    <Setting Name="GitHubRepoOwner" Type="System.String" Scope="User">
+      <Value Profile="(Default)">CenterEdge</Value>
+    </Setting>
+    <Setting Name="GitHubUserName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">RobRobertsCE</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

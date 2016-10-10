@@ -4,15 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{35926F48-0F62-4268-A93A-0F8CD5C914A0}</ProjectGuid>
+    <ProjectGuid>{9A36F292-5A48-4E39-95AC-ED0192C256B2}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>JiraHelper</RootNamespace>
-    <AssemblyName>JiraHelper</AssemblyName>
+    <RootNamespace>CECodeManager</RootNamespace>
+    <AssemblyName>CECodeManager</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,13 +32,19 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>github.ico</ApplicationIcon>
-  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Atlassian.Jira, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\bin\Atlassian.Jira.dll</HintPath>
+    <Reference Include="Atlassian.Jira">
+      <HintPath>..\..\bin\Atlassian.Jira.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Octokit">
+      <HintPath>..\..\bin\Octokit.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>..\..\bin\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -54,28 +59,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommitMessageHelper.cs">
+    <Compile Include="CodeManager.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CommitMessageHelper.Designer.cs">
-      <DependentUpon>CommitMessageHelper.cs</DependentUpon>
+    <Compile Include="CodeManager.Designer.cs">
+      <DependentUpon>CodeManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="ChangedAssembyHelper.cs" />
-    <Compile Include="JiraIssueHelper.cs" />
-    <Compile Include="JIRAIssueView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="JIRAIssueView.Designer.cs">
-      <DependentUpon>JIRAIssueView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="JiraStatus.cs" />
+    <Compile Include="Models\WorkItemView.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="CommitMessageHelper.resx">
-      <DependentUpon>CommitMessageHelper.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="JIRAIssueView.resx">
-      <DependentUpon>JIRAIssueView.cs</DependentUpon>
+    <EmbeddedResource Include="CodeManager.resx">
+      <DependentUpon>CodeManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -87,6 +81,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -101,7 +96,30 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="github.ico" />
+    <ProjectReference Include="..\BranchVersionLibrary\BranchVersionLibrary.csproj">
+      <Project>{6649af5d-6f7d-4d93-9cf5-e5298188d0c3}</Project>
+      <Name>BranchVersionLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DbVersionLibrary\DbVersionLibrary.csproj">
+      <Project>{b91c1cc3-4e04-4abb-92d6-159c4579bf8e}</Project>
+      <Name>DbVersionLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GitHubHelper\GitHubHelper.csproj">
+      <Project>{d94a3dae-515d-4810-ba0c-aab26057f6bd}</Project>
+      <Name>GitHubHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JiraCE\JiraHelper.csproj">
+      <Project>{35926f48-0f62-4268-a93a-0f8cd5c914a0}</Project>
+      <Name>JiraHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PfsConnectMonitor\PfsConnectMonitor.vbproj">
+      <Project>{86e1dce3-1931-42af-a2d4-7a617c95f877}</Project>
+      <Name>PfsConnectMonitor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TeamCityService\TeamCityService.csproj">
+      <Project>{ac28a6ce-549d-47bd-8ff0-3e3af8bc1382}</Project>
+      <Name>TeamCityService</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

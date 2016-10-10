@@ -61,7 +61,7 @@ namespace CECodeManager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 994752ad2cafc601e52a5def40faad2913f4339a.
+        ///   Looks up a localized string similar to 430daefd30be5773170211b938dcaa127786b424.
         /// </summary>
         internal static string GitHubToken {
             get {
