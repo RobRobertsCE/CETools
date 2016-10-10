@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnRemove = new System.Windows.Forms.Button();
             this.btnAddEdit = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.cboAccounts = new System.Windows.Forms.ComboBox();
@@ -44,7 +45,10 @@
             this.lblToken = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblLogin = new System.Windows.Forms.Label();
-            this.btnRemove = new System.Windows.Forms.Button();
+            this.txtUrl = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtOwner = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.pnlAccountDetails.SuspendLayout();
@@ -62,6 +66,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(403, 58);
             this.panel1.TabIndex = 0;
+            // 
+            // btnRemove
+            // 
+            this.btnRemove.Enabled = false;
+            this.btnRemove.Location = new System.Drawing.Point(257, 25);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(66, 21);
+            this.btnRemove.TabIndex = 4;
+            this.btnRemove.Text = "Delete";
+            this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // btnAddEdit
             // 
@@ -106,7 +121,7 @@
             this.panel2.Controls.Add(this.btnApply);
             this.panel2.Controls.Add(this.btnOk);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 199);
+            this.panel2.Location = new System.Drawing.Point(0, 270);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(403, 42);
             this.panel2.TabIndex = 1;
@@ -148,7 +163,11 @@
             // 
             // pnlAccountDetails
             // 
-            this.pnlAccountDetails.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlAccountDetails.BackColor = System.Drawing.Color.White;
+            this.pnlAccountDetails.Controls.Add(this.txtOwner);
+            this.pnlAccountDetails.Controls.Add(this.label4);
+            this.pnlAccountDetails.Controls.Add(this.txtUrl);
+            this.pnlAccountDetails.Controls.Add(this.label3);
             this.pnlAccountDetails.Controls.Add(this.txtToken);
             this.pnlAccountDetails.Controls.Add(this.txtPassword);
             this.pnlAccountDetails.Controls.Add(this.txtLogin);
@@ -159,7 +178,7 @@
             this.pnlAccountDetails.Enabled = false;
             this.pnlAccountDetails.Location = new System.Drawing.Point(0, 58);
             this.pnlAccountDetails.Name = "pnlAccountDetails";
-            this.pnlAccountDetails.Size = new System.Drawing.Size(403, 141);
+            this.pnlAccountDetails.Size = new System.Drawing.Size(403, 212);
             this.pnlAccountDetails.TabIndex = 2;
             // 
             // txtToken
@@ -210,22 +229,43 @@
             this.lblLogin.TabIndex = 0;
             this.lblLogin.Text = "Login";
             // 
-            // btnRemove
+            // txtUrl
             // 
-            this.btnRemove.Enabled = false;
-            this.btnRemove.Location = new System.Drawing.Point(257, 25);
-            this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(66, 21);
-            this.btnRemove.TabIndex = 4;
-            this.btnRemove.Text = "Delete";
-            this.btnRemove.UseVisualStyleBackColor = true;
-            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+            this.txtUrl.Location = new System.Drawing.Point(15, 140);
+            this.txtUrl.Name = "txtUrl";
+            this.txtUrl.Size = new System.Drawing.Size(374, 20);
+            this.txtUrl.TabIndex = 7;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 124);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(29, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "URL";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 163);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(38, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Owner";
+            // 
+            // txtOwner
+            // 
+            this.txtOwner.Location = new System.Drawing.Point(15, 179);
+            this.txtOwner.Name = "txtOwner";
+            this.txtOwner.Size = new System.Drawing.Size(164, 20);
+            this.txtOwner.TabIndex = 9;
             // 
             // AccountsDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(403, 241);
+            this.ClientSize = new System.Drawing.Size(403, 312);
             this.Controls.Add(this.pnlAccountDetails);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -260,5 +300,9 @@
         private System.Windows.Forms.Button btnApply;
         private System.Windows.Forms.Button btnAddEdit;
         private System.Windows.Forms.Button btnRemove;
+        private System.Windows.Forms.TextBox txtOwner;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtUrl;
+        private System.Windows.Forms.Label label3;
     }
 }

@@ -43,9 +43,15 @@ namespace CECodeManager
         {
             SetAppStatusDisplay("Loading...");
 
+
             if (null == _gitHubRepoHelper)
             {
-                _gitHubRepoHelper = new CEGitHubClient(Settings.Default.GitHubRepoOwner, Settings.Default.GitHubUserName, Settings.Default.GitHubToken);
+                // 48cccb2fd69207ed82b239288d7256a1b9713990 
+
+                //_gitHubRepoHelper = new CEGitHubClient(Settings.Default.GitHubRepoOwner, Settings.Default.GitHubUserName, Settings.Default.GitHubToken);
+
+                var gitHubAccount = CETools.Identities.AccountProfileHelper.GetGitHubAccountInfo();
+                _gitHubRepoHelper = new CEGitHubClient(gitHubAccount.Owner, gitHubAccount.Login, gitHubAccount.Token);
             }
 
             _jiraHelper = new JiraIssueHelper();
@@ -1138,6 +1144,9 @@ namespace CECodeManager
             {
                 var dialog = new AccountsDialog();
                 var result = dialog.ShowDialog(this);
+
+                var gitHubAccount = CETools.Identities.AccountProfileHelper.GetGitHubAccountInfo();
+                _gitHubRepoHelper = new CEGitHubClient(gitHubAccount.Owner, gitHubAccount.Login, gitHubAccount.Token);
             }
             catch (Exception ex)
             {

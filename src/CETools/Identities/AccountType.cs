@@ -1,6 +1,6 @@
 ﻿namespace CETools.Identities
 {
-    public enum IdentityAccount
+    public enum AccountType
     {
         GitHub,
         JIRA,

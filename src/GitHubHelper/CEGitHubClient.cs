@@ -28,7 +28,7 @@ namespace GitHubHelper
         {
             _owner = owner;
             _user = user;
-            _token = MyToken;
+            _token = token;
             _github = new GitHubClient(new ProductHeaderValue("CEGitHubClient"));
             _github.Credentials = new Credentials(_token);
         }

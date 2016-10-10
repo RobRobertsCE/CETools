@@ -1,22 +1,21 @@
 ﻿using CETools.Identities;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CECodeManager.Dialogs
 {
     public partial class AccountsDialog : Form
     {
+        #region fields
         private bool _loading = true;
         private bool _editing = false;
-        private TokenizedIdentity _selectedIdentity;
+        private AccountProfile _selectedIdentity;
+        #endregion
 
+        #region ctor / load
         public AccountsDialog()
         {
             InitializeComponent();
@@ -27,7 +26,7 @@ namespace CECodeManager.Dialogs
             try
             {
                 lblWinUser.Text = Environment.UserName;
-                List<IdentityAccount> modes = Enum.GetValues(typeof(IdentityAccount)).Cast<IdentityAccount>().ToList();
+                List<AccountType> modes = Enum.GetValues(typeof(AccountType)).Cast<AccountType>().ToList();
                 cboAccounts.DataSource = modes;
                 cboAccounts.SelectedIndex = -1;
 
@@ -44,7 +43,9 @@ namespace CECodeManager.Dialogs
                 cboAccounts.SelectedIndex = 0;
             }
         }
+        #endregion
 
+        #region display identity
         private void cboAccounts_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -53,9 +54,9 @@ namespace CECodeManager.Dialogs
 
                 if (null == cboAccounts.SelectedItem) return;
 
-                var selectedAccount = (IdentityAccount)cboAccounts.SelectedItem;
+                var selectedAccount = (AccountType)cboAccounts.SelectedItem;
 
-                _selectedIdentity = IdentityAccountHelper.GetTAccountInfo(selectedAccount);
+                _selectedIdentity = AccountProfileHelper.GetTAccountInfo(selectedAccount);
                 if (null != _selectedIdentity)
                 {
                     btnAddEdit.Text = "Edit";
@@ -81,6 +82,8 @@ namespace CECodeManager.Dialogs
             txtLogin.Clear();
             txtPassword.Clear();
             txtToken.Clear();
+            txtUrl.Clear();
+            txtOwner.Clear();
         }
 
         private void ResetFormState()
@@ -95,29 +98,22 @@ namespace CECodeManager.Dialogs
             btnApply.Enabled = false;
         }
 
-        private void DisplaySelectedAccountIdentity(TokenizedIdentity identity)
+        private void DisplaySelectedAccountIdentity(AccountProfile identity)
         {
             txtLogin.Text = identity.Login;
             txtPassword.Text = identity.Password;
             txtToken.Text = identity.Token;
+            txtOwner.Text = identity.Owner;
+            txtUrl.Text = identity.URL;
         }
+        #endregion
 
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            if (btnClose.Text == "Close")
-                this.Close();
-            else
-            {
-                ClearAccountDetailsDisplay();
-                ResetFormState();
-            }
-        }
-
+        #region add/edit identity
         private void btnAddEdit_Click(object sender, EventArgs e)
         {
             try
             {
-                var selectedAccount = (IdentityAccount)cboAccounts.SelectedItem;
+                var selectedAccount = (AccountType)cboAccounts.SelectedItem;
                 cboAccounts.Enabled = false;
                 btnAddEdit.Enabled = false;
                 btnApply.Enabled = true;
@@ -125,6 +121,37 @@ namespace CECodeManager.Dialogs
                 btnApply.Enabled = true;
                 pnlAccountDetails.Enabled = true;
                 btnClose.Text = "Cancel";
+
+                switch(selectedAccount)
+                {
+                    case AccountType.JIRA:
+                        {
+                            txtLogin.Enabled = true;
+                            txtPassword.Enabled = true;
+                            txtToken.Enabled = false;
+                            txtOwner.Enabled = true;
+                            txtUrl.Enabled = true;
+                            break;
+                        }
+                    case AccountType.GitHub:
+                        {
+                            txtLogin.Enabled = true;
+                            txtPassword.Enabled = true;
+                            txtToken.Enabled = true;
+                            txtOwner.Enabled = true;
+                            txtUrl.Enabled = false;
+                            break;
+                        }
+                    case AccountType.TeamCity:
+                        {
+                            txtLogin.Enabled = true;
+                            txtPassword.Enabled = true;
+                            txtToken.Enabled = false;
+                            txtOwner.Enabled = false;
+                            txtUrl.Enabled = false;
+                            break;
+                        }
+                }
 
                 if (btnAddEdit.Text == "Edit")
                 {
@@ -143,7 +170,7 @@ namespace CECodeManager.Dialogs
             }
         }
 
-        private void AddNewIdentity(IdentityAccount account)
+        private void AddNewIdentity(AccountType account)
         {
             try
             {
@@ -151,13 +178,11 @@ namespace CECodeManager.Dialogs
                 btnAddEdit.Enabled = false;
                 btnApply.Enabled = true;
 
-                _selectedIdentity = new TokenizedIdentity()
+                _selectedIdentity = new AccountProfile()
                 {
                     WinUser = Environment.UserName,
                     Account = account,
-                    Login = "<login>",
-                    Password = "<password>",
-                    Token = "<token>"
+                    Login = "<required>"
                 };
 
                 DisplaySelectedAccountIdentity(_selectedIdentity);
@@ -168,15 +193,24 @@ namespace CECodeManager.Dialogs
                 Console.WriteLine(ex.ToString());
             }
         }
+        #endregion
 
+        #region apply / save changes
         private void SaveChanges()
         {
             try
             {
-                _selectedIdentity.Login = txtLogin.Text;
-                _selectedIdentity.Password = txtPassword.Text;
-                _selectedIdentity.Token = txtToken.Text;
-                IdentityAccountHelper.UpdateAccountInfo(_selectedIdentity);
+                if (string.IsNullOrEmpty(txtLogin.Text))
+                    MessageBox.Show("Login name is required");
+                else
+                {
+                    _selectedIdentity.Login = txtLogin.Text;
+                    _selectedIdentity.Password = txtPassword.Text;
+                    _selectedIdentity.Token = txtToken.Text;
+                    _selectedIdentity.URL = txtUrl.Text;
+                    _selectedIdentity.Owner = txtOwner.Text;
+                    AccountProfileHelper.UpdateAccountInfo(_selectedIdentity);
+                }              
             }
             catch (Exception ex)
             {
@@ -210,8 +244,10 @@ namespace CECodeManager.Dialogs
                 MessageBox.Show(ex.Message);
                 Console.WriteLine(ex.ToString());
             }
-        }
+        } 
+        #endregion
 
+        #region remove identity
         private void btnRemove_Click(object sender, EventArgs e)
         {
             RemoveIdentity();
@@ -221,7 +257,7 @@ namespace CECodeManager.Dialogs
         {
             try
             {
-                IdentityAccountHelper.DeleteAccountInfo(_selectedIdentity);
+                AccountProfileHelper.DeleteAccountInfo(_selectedIdentity);
                 ClearAccountDetailsDisplay();
                 ResetFormState();
             }
@@ -231,5 +267,23 @@ namespace CECodeManager.Dialogs
                 Console.WriteLine(ex.ToString());
             }
         }
+        #endregion
+
+        #region cancel / close
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            if (btnClose.Text == "Close")
+                this.Close();
+            else
+            {
+                ClearAccountDetailsDisplay();
+                ResetFormState();
+                // reselect the current selection to reload the original data.
+                var currentSelection = cboAccounts.SelectedIndex;
+                cboAccounts.SelectedIndex = -1;
+                cboAccounts.SelectedIndex = currentSelection;
+            }
+        }
+        #endregion
     }
 }

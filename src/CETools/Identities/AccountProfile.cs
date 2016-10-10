@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CETools.Identities
 {
-    public class TokenizedIdentity
+    public class AccountProfile
     {
-        public IdentityAccount Account { get; set; }
+        public AccountType Account { get; set; }
 
         public string WinUser { get; set; }
 
@@ -17,5 +17,9 @@ namespace CETools.Identities
         public string Password { get; set; }
 
         public string Token { get; set; }
+
+        public string URL { get; set; }
+
+        public string Owner { get; set; }
     }
 }

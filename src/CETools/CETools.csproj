@@ -45,9 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Encryption\AES.cs" />
-    <Compile Include="Identities\IdentityAccount.cs" />
-    <Compile Include="Identities\IdentityAccountHelper.cs" />
-    <Compile Include="Identities\TokenizedIdentity.cs" />
+    <Compile Include="Identities\AccountType.cs" />
+    <Compile Include="Identities\AccountProfileHelper.cs" />
+    <Compile Include="Identities\AccountProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
