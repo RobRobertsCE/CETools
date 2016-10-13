@@ -56,11 +56,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Branch.cs" />
     <Compile Include="Build.cs" />
+    <Compile Include="BuildChanges.cs" />
     <Compile Include="BuildDetails.cs" />
-    <Compile Include="BuildRequestResult.cs" />
+    <Compile Include="BuildRequestResponse.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="EndpointBase.cs" />
+    <Compile Include="GetBranchesResponse.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="RunningBuild.cs" />
     <Compile Include="TeamCity.cs" />

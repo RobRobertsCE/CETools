@@ -102,6 +102,12 @@
   <ItemGroup>
     <Content Include="github.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CETools\CETools.csproj">
+      <Project>{3765d107-6c6c-4039-b733-b21d5ffdcd94}</Project>
+      <Name>CETools</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

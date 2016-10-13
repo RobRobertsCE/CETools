@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common.cs" />
     <Compile Include="Encryption\AES.cs" />
     <Compile Include="Identities\AccountType.cs" />
     <Compile Include="Identities\AccountProfileHelper.cs" />

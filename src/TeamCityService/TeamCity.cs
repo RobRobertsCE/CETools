@@ -54,29 +54,15 @@ namespace TeamCityService
 
             return results;
         }
+
         public IList<Build> GetBuilds()
         {
             List<Build> results = null;
 
             HttpClient client = new HttpClient();
-            /* THESE WORK
-            //client.BaseAddress = new Uri(Build.GetListUrl());
-            var url = Build.GetListUrl();
-            var url = Build.GetListUrl() + "?count=20";
-            var url = Build.GetListUrl() + "?" + "buildType:Advantage_Build,count=12";
-            */
-            /* THESE WORK IN POSTMAN            
-            // https://teamcity.pfestore.com/httpAuth/app/rest/builds/buildType:Advantage_Build
-            */
-            /* THESE DO NOT WORK
-            //var url = Build.GetListUrl() + "/" + "buildType:Advantage_Build";
-            //var url = "https://teamcity.pfestore.com/httpAuth/app/rest/builds/buildType:Advantage_Build";
-            //var url = "https://teamcity.pfestore.com/httpAuth/app/rest/builds/running:false?count=10,start=0";
-            */
 
-            var url = Build.GetListUrl() + "?" + "buildType:Advantage_Build";
+            var url = Build.GetListUrl();// + "?" + "buildType:Advantage_Build";
             client.BaseAddress = new Uri(url);
-
 
             // Add an Accept header for JSON format.
             client.DefaultRequestHeaders.Accept.Add(
@@ -90,7 +76,7 @@ namespace TeamCityService
             if (response.IsSuccessStatusCode)
             {
                 // Parse the response body. Blocking!
-                var responseData = response.Content.ReadAsAsync<BuildRequestResult>();
+                var responseData = response.Content.ReadAsAsync<BuildRequestResponse>();
 
                 if (null != responseData.Result.build)
                 {
@@ -116,15 +102,10 @@ namespace TeamCityService
             List<Branch> results = null;
 
             HttpClient client = new HttpClient();
-
-            /* WORKS IN POSTMAN
-            https://teamcity.pfestore.com/httpAuth/app/rest/buildTypes/id:Advantage_Build/branches/
-            */
-            //var url = Build.GetListUrl() + "/" + "buildTypes/id:Advantage_Build/branches/";
+            
             var url = "https://teamcity.pfestore.com/httpAuth/app/rest/buildTypes/id:Advantage_Build/branches/";
             client.BaseAddress = new Uri(url);
-
-
+            
             // Add an Accept header for JSON format.
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
@@ -137,25 +118,9 @@ namespace TeamCityService
             if (response.IsSuccessStatusCode)
             {
                 // Parse the response body. Blocking!
-                var responseData = response.Content.ReadAsAsync<RootObject>();
+                var responseData = response.Content.ReadAsAsync<GetBranchesResponse>();
 
-                results = responseData.Result.branch;
-
-                //if (null != results)
-                //{
-                //    foreach (var d in results)
-                //    {
-                //        //if (true == d.@default)
-                //        //{
-                //        //    Console.WriteLine(d.name + " (default)");
-                //        //}
-                //        //else
-                //        //{
-                //        //    Console.WriteLine(d.name);
-                //        //}
-
-                //    }
-                //}
+                results = responseData.Result.branch;                
             }
             else
             {
@@ -165,124 +130,19 @@ namespace TeamCityService
             return results;
         }
 
-        //public BuildDetails GetBuildDetails(Build build)
-        //{
-        //    BuildDetails results = null;
-
-        //    HttpClient client = new HttpClient();
-
-        //    /* WORKS IN POSTMAN
-        //    https://teamcity.pfestore.com/httpAuth/app/rest/builds/buildType:Advantage_Build?id=3910
-        //    */
-        //    //var url = Build.GetListUrl() + "/" + "buildTypes/id:Advantage_Build/branches/";
-        //    var url = "https://teamcity.pfestore.com/httpAuth/app/rest/buildTypes/id:Advantage_Build/branches/";
-        //    client.BaseAddress = new Uri(url);
-
-
-        //    // Add an Accept header for JSON format.
-        //    client.DefaultRequestHeaders.Accept.Add(
-        //    new MediaTypeWithQualityHeaderValue("application/json"));
-
-        //    byte[] cred = UTF8Encoding.UTF8.GetBytes("rroberts:hel-j205");
-        //    client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(cred));
-
-        //    // List data response.
-        //    HttpResponseMessage response = client.GetAsync("").Result;  // Blocking call!
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        // Parse the response body. Blocking!
-        //        var responseData = response.Content.ReadAsAsync<BuildDetails>();
-
-        //        results = responseData.Result;
-
-        //        if (null != results)
-        //        {
-        //            Console.WriteLine(results.state + ": " + results.status);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
-        //    }
-
-        //    return results;
-        //}
-
-        public class Branch
+        /// <summary>
+        /// returns builds by branch name.
+        /// </summary>
+        /// <param name="branchName">Format: XXXX/merge (where XXXX = GitHub pull request number), refs/heads/develop, refs/heads/master, merge-master-16.5-into-develop-16.6, etc</param>
+        /// <returns></returns>
+        public IList<Build> GetBranchBuilds(string branchName)
         {
-            public string name { get; set; }
-            public bool @default { get; set; }
-
-            public override string ToString()
-            {
-                if (true == @default)
-                {
-                    return name + " (default)";
-                }
-                else
-                {
-                    return name;
-                }
-            }
-        }
-
-        public class RootObject
-        {
-            public List<Branch> branch { get; set; }
-        }
-
-        public Build GetAdvantageBuild()
-        {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(Build.GetListUrl() + "/" + "buildType:Advantage_Build");
-
-            // Add an Accept header for JSON format.
-            client.DefaultRequestHeaders.Accept.Add(
-            new MediaTypeWithQualityHeaderValue("application/json"));
-
-            byte[] cred = UTF8Encoding.UTF8.GetBytes("rroberts:hel-j205");
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(cred));
-
-            // List data response.
-            HttpResponseMessage response = client.GetAsync("").Result;  // Blocking call!
-            if (response.IsSuccessStatusCode)
-            {
-                // Parse the response body. Blocking!
-                var responseData = response.Content.ReadAsAsync<Build>();
-                var dataObject = responseData.Result;
-                return dataObject;
-            }
-            else
-            {
-                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
-                return null;
-            }
-        }
-
-        public IList<Build> GetBranchBuilds(string pullRequestNumber)
-        {
-
             List<Build> results = null;
 
             HttpClient client = new HttpClient();
-            /* THESE WORK
-            //client.BaseAddress = new Uri(Build.GetListUrl());
-            var url = Build.GetListUrl();
-            var url = Build.GetListUrl() + "?count=20";
-            var url = Build.GetListUrl() + "?" + "buildType:Advantage_Build,count=12";
-            */
-            /* THESE WORK IN POSTMAN            
-            // https://teamcity.pfestore.com/httpAuth/app/rest/builds/buildType:Advantage_Build
-            */
-            /* THESE DO NOT WORK
-            //var url = Build.GetListUrl() + "/" + "buildType:Advantage_Build";
-            //var url = "https://teamcity.pfestore.com/httpAuth/app/rest/builds/buildType:Advantage_Build";
-            //var url = "https://teamcity.pfestore.com/httpAuth/app/rest/builds/running:false?count=10,start=0";
-            */
 
-            var url = Build.GetListUrl() + "?" + "locator=branch:" + pullRequestNumber;
+            var url = Build.GetListUrl() + "?" + "locator=branch:" + branchName;
             client.BaseAddress = new Uri(url);
-
 
             // Add an Accept header for JSON format.
             client.DefaultRequestHeaders.Accept.Add(
@@ -296,7 +156,7 @@ namespace TeamCityService
             if (response.IsSuccessStatusCode)
             {
                 // Parse the response body. Blocking!
-                var responseData = response.Content.ReadAsAsync<BuildRequestResult>();
+                var responseData = response.Content.ReadAsAsync<BuildRequestResponse>();
 
                 if (null != responseData.Result.build)
                 {
@@ -317,40 +177,15 @@ namespace TeamCityService
             return results;
         }
 
-        public IList<Build> GetPatchBuilds(string pullRequestNumber)
+        public IList<Build> GetPatchBuilds()
         {
-
             List<Build> results = null;
 
             HttpClient client = new HttpClient();
-            /* THESE WORK
-            //client.BaseAddress = new Uri(Build.GetListUrl());
-            var url = Build.GetListUrl();
-            var url = Build.GetListUrl() + "?count=20";
-            var url = Build.GetListUrl() + "?" + "buildType:Advantage_Build,count=12";
-            */
-            /* THESE WORK IN POSTMAN            
-            // https://teamcity.pfestore.com/httpAuth/app/rest/builds/buildType:Advantage_Build
-            */
-            /* THESE DO NOT WORK
-            //var url = Build.GetListUrl() + "/" + "buildType:Advantage_Build";
-            //var url = "https://teamcity.pfestore.com/httpAuth/app/rest/builds/buildType:Advantage_Build";
-            //var url = "https://teamcity.pfestore.com/httpAuth/app/rest/builds/running:false?count=10,start=0";
-            */
-
-            //var url = Build.GetListUrl() + "?" + "locator=branch:" + pullRequestNumber;
-
-            //var url = Build.GetListUrl() + "?" + "locator=buildType:Advantage_Patches";
-            // COMPLETED -> var url = Build.GetListUrl() + "?" + "locator=buildType:Advantage_Patches";
-            // RUNNING -> var url = Build.GetListUrl() + "?" + "locator=buildType:Advantage_Patches,running:true";
-
-
 
             var url = Build.GetListUrl() + "?" + "locator=buildType:Advantage_Patches";
-            //var url = Build.GetPatchesUrl();
 
             client.BaseAddress = new Uri(url);
-
 
             // Add an Accept header for JSON format.
             client.DefaultRequestHeaders.Accept.Add(
@@ -364,7 +199,7 @@ namespace TeamCityService
             if (response.IsSuccessStatusCode)
             {
                 // Parse the response body. Blocking!
-                var responseData = response.Content.ReadAsAsync<BuildRequestResult>();
+                var responseData = response.Content.ReadAsAsync<BuildRequestResponse>();
 
                 if (null != responseData.Result.build)
                 {
@@ -381,31 +216,106 @@ namespace TeamCityService
                 Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
             }
 
+            return results.Take(20).ToList();
+        }
+
+        public IList<Build> GetAdvantageBuilds()
+        {
+            List<Build> results = null;
+
+            HttpClient client = new HttpClient();
+
+            var url = Build.GetListUrl() + "?" + "locator=buildType:Advantage_Build";
+
+            client.BaseAddress = new Uri(url);
+
+            // Add an Accept header for JSON format.
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            byte[] cred = UTF8Encoding.UTF8.GetBytes("rroberts:hel-j205");
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(cred));
+
+            // List data response.
+            HttpResponseMessage response = client.GetAsync("").Result;  // Blocking call!
+            if (response.IsSuccessStatusCode)
+            {
+                // Parse the response body. Blocking!
+                var responseData = response.Content.ReadAsAsync<BuildRequestResponse>();
+
+                if (null != responseData.Result.build)
+                {
+                    results = responseData.Result.build;
+
+                    foreach (var d in results)
+                    {
+                        Console.WriteLine("{0} : {1}", d.branchName, d.id);
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+            }
+
+            return results;
+        }
+
+        public IList<Build> GetSecurityScanBuilds()
+        {
+            List<Build> results = null;
+
+            HttpClient client = new HttpClient();
+
+            var url = Build.GetListUrl() + "?" + "locator=buildType:Advantage_SecurityScan";
+
+            client.BaseAddress = new Uri(url);
+
+            // Add an Accept header for JSON format.
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            byte[] cred = UTF8Encoding.UTF8.GetBytes("rroberts:hel-j205");
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(cred));
+
+            // List data response.
+            HttpResponseMessage response = client.GetAsync("").Result;  // Blocking call!
+            if (response.IsSuccessStatusCode)
+            {
+                // Parse the response body. Blocking!
+                var responseData = response.Content.ReadAsAsync<BuildRequestResponse>();
+
+                if (null != responseData.Result.build)
+                {
+                    results = responseData.Result.build;
+
+                    foreach (var d in results)
+                    {
+                        Console.WriteLine("{0} : {1}", d.branchName, d.id);
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+            }
 
             return results;
         }
 
         // build details
-        public BuildDetails GetPatchBuildDetails(Build build)
+        public BuildDetails GetBuildDetails(Build build)
         {
-            return GetBuildDetails(build.id.ToString());
+            return GetBuildDetails(build.id);
         }
-        public BuildDetails GetPatchBuildDetails(string buildId)
-        {
-            return GetBuildDetails(buildId);
-        }
-        public BuildDetails GetBuildDetails(string buildId)
+
+        public BuildDetails GetBuildDetails(int buildId)
         {
             BuildDetails results = null;
 
             HttpClient client = new HttpClient();
 
-            /* WORKS IN POSTMAN
-            https://teamcity.pfestore.com/httpAuth/app/rest/builds/buildType:Advantage_Build?id=3910
-            */
-
-            var url = String.Format("https://teamcity.pfestore.com/httpAuth/app/rest/builds/id:{0}?buildTypeId=Advantage_Patches", buildId);
-            // nope -> var url = String.Format("https://teamcity.pfestore.com/httpAuth/app/rest/builds/buildTypeId:Advantage_Patches?id={0}", buildId);
+            var url = String.Format("https://teamcity.pfestore.com/httpAuth/app/rest/builds/id:{0}", buildId.ToString());
             client.BaseAddress = new Uri(url);
             Console.WriteLine(url);
             // Add an Accept header for JSON format.
@@ -436,22 +346,123 @@ namespace TeamCityService
 
             return results;
         }
+
+
+        //public BuildChanges GetBuildChanges(int buildId)
+        //{
+        //    BuildChanges results = null;
+
+        //    HttpClient client = new HttpClient();
+
+        //    //var url = String.Format("https://teamcity.pfestore.com/httpAuth/app/rest/changes/id:{0}", changeId.ToString());
+        //    var url = String.Format("https://teamcity.pfestore.com/httpAuth/app/rest/changes/?locator=build:(id:{0})", buildId.ToString());
+
+        //    client.BaseAddress = new Uri(url);
+        //    Console.WriteLine(url);
+        //    // Add an Accept header for JSON format.
+        //    client.DefaultRequestHeaders.Accept.Add(
+        //    new MediaTypeWithQualityHeaderValue("application/json"));
+
+        //    byte[] cred = UTF8Encoding.UTF8.GetBytes("rroberts:hel-j205");
+        //    client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(cred));
+
+        //    // List data response.
+        //    HttpResponseMessage response = client.GetAsync("").Result;  // Blocking call!
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        // Parse the response body. Blocking!
+        //        var responseData = response.Content.ReadAsAsync<BuildChanges>();
+        //        results = responseData.Result;                
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+        //    }
+
+        //    return results;
+        //}
+
+        public IList<BuildChange> GetBuildChangeList(int buildId)
+        {
+            IList<BuildChange> results = null;
+
+            HttpClient client = new HttpClient();
+
+            //var url = String.Format("https://teamcity.pfestore.com/httpAuth/app/rest/changes/id:{0}", changeId.ToString());
+            var url = String.Format("https://teamcity.pfestore.com/httpAuth/app/rest/changes/?locator=build:(id:{0})", buildId.ToString());
+
+            client.BaseAddress = new Uri(url);
+            Console.WriteLine(url);
+            // Add an Accept header for JSON format.
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            byte[] cred = UTF8Encoding.UTF8.GetBytes("rroberts:hel-j205");
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(cred));
+
+            // List data response.
+            HttpResponseMessage response = client.GetAsync("").Result;  // Blocking call!
+            if (response.IsSuccessStatusCode)
+            {
+                // Parse the response body. Blocking!
+                var responseData = response.Content.ReadAsAsync<BuildChangeListResponse>();
+                results = responseData.Result.change;
+            }
+            else
+            {
+                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+            }
+
+            return results;
+        }
+
+
+        // get build changes
+        // https://teamcity.pfestore.com/httpAuth/app/rest/changes/id:492
+        /*
+        {
+    "id": 492,
+    "version": "5213d6fcfd96315cec46b41721b4ae7c88ee7df1",
+    "username": "rroberts",
+    "date": "20160624T205455+0000",
+    "href": "/httpAuth/app/rest/changes/id:492",
+    "webUrl": "https://teamcity.pfestore.com/viewModification.html?modId=492&personal=false",
+    "comment": "Correct version number on sql script.\n",
+    "user": {
+        "username": "rroberts",
+        "name": "Rob Roberts",
+        "id": 2,
+        "href": "/httpAuth/app/rest/users/id:2"
+    },
+    "files": {
+        "file": [
+            {
+                "before-revision": "a3b718b2776bad7a82041e5b1c981b889334b9ad",
+                "after-revision": "5213d6fcfd96315cec46b41721b4ae7c88ee7df1",
+                "file": "src/AdvUpgrade/AdvUpgrade/16.4/16.4.26/NotifyEventHistory.16.4.100.sql",
+                "relative-file": "src/AdvUpgrade/AdvUpgrade/16.4/16.4.26/NotifyEventHistory.16.4.100.sql"
+            },
+            {
+                "before-revision": "a3b718b2776bad7a82041e5b1c981b889334b9ad",
+                "after-revision": "5213d6fcfd96315cec46b41721b4ae7c88ee7df1",
+                "file": "src/AdvUpgrade/AdvUpgrade/16.4/16.4.26/NotifyEventHistory.16.4.26.sql",
+                "relative-file": "src/AdvUpgrade/AdvUpgrade/16.4/16.4.26/NotifyEventHistory.16.4.26.sql"
+            },
+            {
+                "before-revision": "a3b718b2776bad7a82041e5b1c981b889334b9ad",
+                "after-revision": "5213d6fcfd96315cec46b41721b4ae7c88ee7df1",
+                "file": "src/AdvUpgrade/AdvUpgrade/AdvUpgrade.vbproj",
+                "relative-file": "src/AdvUpgrade/AdvUpgrade/AdvUpgrade.vbproj"
+            }
+        ]
+    },
+    "vcsRootInstance": {
+        "id": "3",
+        "vcs-root-id": "Advantage_HttpsGithubComCenterEdgeAdvantageGitRefsHeadsDevelop",
+        "name": "https://github.com/CenterEdge/Advantage.git#refs/heads/develop",
+        "href": "/httpAuth/app/rest/vcs-root-instances/id:3"
     }
 }
-
-//{
-//    "count": 1,
-//    "href": "/httpAuth/app/rest/builds?locator=id:3917",
-//    "build": [
-//        {
-//            "id": 3917,
-//            "buildTypeId": "Advantage_Build",
-//            "number": "2517",
-//            "status": "SUCCESS",
-//            "state": "finished",
-//            "branchName": "5028/merge",
-//            "href": "/httpAuth/app/rest/builds/id:3917",
-//            "webUrl": "https://teamcity.pfestore.com/viewLog.html?buildId=3917&buildTypeId=Advantage_Build"
-//        }
-//    ]
-//}
+    */
+    }
+}

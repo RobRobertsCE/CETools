@@ -103,7 +103,7 @@ namespace GitHubHelper
         }
         #endregion
 
-        #region commits
+        #region pull requests
         async Task<PullRequest> GetPullRequestDetails(Octokit.Issue request, int issueId)
         {
             var repositoryName = request.PullRequest.HtmlUrl.Segments[2].TrimEnd('/');
@@ -124,10 +124,39 @@ namespace GitHubHelper
 
             return pullRequestDetails;
         }
+        #endregion
 
+        #region commits
         public async Task<Octokit.GitHubCommit> GetCommits(string repoName, string sha)
         {
             var commitTask = await _github.Repository.Commit.Get(_owner, repoName, sha);
+
+            Console.WriteLine("-commitTask-");
+            Console.WriteLine("commitTask.Sha=" + commitTask.Sha);
+            Console.WriteLine("commitTask.Ref=" + commitTask.Ref);
+            Console.WriteLine("commitTask.Commit.Sha=" + commitTask.Commit.Sha);
+            Console.WriteLine("commitTask.Commit.Ref=" + commitTask.Commit.Ref);
+            foreach (var parent in commitTask.Parents)
+            {
+                Console.WriteLine("-Parents-");
+                Console.WriteLine("parent.Sha=" + parent.Sha);
+                Console.WriteLine("parent.Ref=" + parent.Ref);
+                // this goes on ad infinitum.. goes DOWN the list, we need to go UP
+                //if (!String.IsNullOrEmpty(parent.Sha))
+                //{
+                //    await GetCommits(repoName, parent.Sha);
+                //}
+
+
+                if (!String.IsNullOrEmpty(parent.Sha))
+                {
+                    //var branch = await _github.Repository.GetBranch(_owner, repoName, "ADVANTAGE");
+                    var branch = await _github.Repository.Branch.Get(_owner, repoName, "master");
+                    Console.WriteLine("branch.Name=" + branch.Name);
+                    Console.WriteLine("branch.Commit.Sha=" + branch.Commit.Sha);
+                }
+            }
+            Console.WriteLine("--------");
 
             //if (null != commitTask)
             //{
@@ -145,5 +174,32 @@ namespace GitHubHelper
             return commitTask;
         }
         #endregion
+
+        #region branches
+        public async Task<Branch> GetMasterBranch()
+        {
+            return await GetBranch("ADVANTAGE", "master");
+        }
+        public async Task<Branch> GetDevelopBranch()
+        {
+            return await GetBranch("ADVANTAGE", "develop");
+        }
+        public async Task<Branch> GetBranch(string repoName, string branchName)
+        {
+            return await _github.Repository.Branch.Get(_owner, repoName, branchName);
+        }
+        #endregion
+
+        public async Task<TreeResponse> GetTree(string repoName, string Sha)
+        {
+            var t =  await _github.Git.Tree.Get(_owner, repoName, Sha);
+            return t;
+        }
+
+        public async Task<CompareResult> Compare(string repoName, string Sha, string head)
+        {
+            var result = await _github.Repository.Commit.Compare(_owner, repoName, Sha, head);
+            return result;
+        }
     }
 }

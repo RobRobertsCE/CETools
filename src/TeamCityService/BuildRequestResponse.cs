@@ -2,7 +2,7 @@
 
 namespace TeamCityService
 {
-    public class BuildRequestResult
+    public class BuildRequestResponse
     {
         public int count { get; set; }
         public string href { get; set; }

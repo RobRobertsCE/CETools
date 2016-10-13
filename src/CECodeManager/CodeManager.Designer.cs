@@ -44,10 +44,10 @@
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.changedFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
-            this.updateJIRAPropertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.updateCommitPropertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.branchMonitorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
+            this.accountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblBranch = new System.Windows.Forms.ToolStripStatusLabel();
@@ -93,16 +93,18 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pnlTeamCity = new System.Windows.Forms.Panel();
             this.btnHideBuildsPanel = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.lvBuilds = new System.Windows.Forms.ListView();
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.pnlBuildGridAndDetails = new System.Windows.Forms.Panel();
             this.pnlBuildDetails = new System.Windows.Forms.Panel();
+            this.label18 = new System.Windows.Forms.Label();
+            this.txtBuildDetailStatusText = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.txtBuildDetailQueued = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.txtChangeDev = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txtChangeVersion = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txtChangeId = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.txtBuildDetailPlan = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -117,36 +119,28 @@
             this.btnHideBuildDetails = new System.Windows.Forms.Button();
             this.txtBuildDetailStarted = new System.Windows.Forms.TextBox();
             this.lblBuildDetails = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.splitter3 = new System.Windows.Forms.Splitter();
+            this.lvBuilds = new System.Windows.Forms.ListView();
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.pnlBuildGridButtons = new System.Windows.Forms.Panel();
+            this.btnScan = new System.Windows.Forms.Button();
+            this.btnAdvantageBuilds = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnPatchBuilds = new System.Windows.Forms.Button();
             this.txtPullRequestNumber = new System.Windows.Forms.TextBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnSearchBuilds = new System.Windows.Forms.Button();
+            this.btnRunningBuilds = new System.Windows.Forms.Button();
+            this.btnBuildHistory = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.pnlChangedFilesAndAssemblies = new System.Windows.Forms.Panel();
-            this.pnlChangedFiles = new System.Windows.Forms.Panel();
-            this.btnHideChangedFiles = new System.Windows.Forms.Button();
-            this.lvChangedFiles = new System.Windows.Forms.ListView();
-            this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label10 = new System.Windows.Forms.Label();
-            this.pnlChangedAssemblies = new System.Windows.Forms.Panel();
-            this.lvChangedAssemblies = new System.Windows.Forms.ListView();
-            this.columnHeader15 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label11 = new System.Windows.Forms.Label();
-            this.splitter2 = new System.Windows.Forms.Splitter();
-            this.pnlCommitAndDescription = new System.Windows.Forms.Panel();
-            this.pnlCommits = new System.Windows.Forms.Panel();
-            this.lvCommits = new System.Windows.Forms.ListView();
-            this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader16 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label12 = new System.Windows.Forms.Label();
-            this.txtCommitDescription = new System.Windows.Forms.TextBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabTeamCity = new System.Windows.Forms.TabPage();
+            this.tabJIRA = new System.Windows.Forms.TabPage();
             this.panel4 = new System.Windows.Forms.Panel();
             this.lvJira = new System.Windows.Forms.ListView();
             this.columnHeader17 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -155,11 +149,34 @@
             this.columnHeader20 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader21 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader22 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader28 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label13 = new System.Windows.Forms.Label();
             this.pnlTabControl = new System.Windows.Forms.Panel();
+            this.splitter2 = new System.Windows.Forms.Splitter();
+            this.pnlCommitAndDescription = new System.Windows.Forms.Panel();
+            this.splitter5 = new System.Windows.Forms.Splitter();
+            this.pnlCommits = new System.Windows.Forms.Panel();
+            this.lvCommits = new System.Windows.Forms.ListView();
+            this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader16 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtCommitDescription = new System.Windows.Forms.TextBox();
+            this.splitter4 = new System.Windows.Forms.Splitter();
+            this.pnlChangesDisplay = new System.Windows.Forms.Panel();
+            this.btnHideChangedFilesAndAssemblies = new System.Windows.Forms.Button();
+            this.pnlChangedFilesAndAssemblies = new System.Windows.Forms.Panel();
+            this.pnlChangedFiles = new System.Windows.Forms.Panel();
+            this.lvChangedFiles = new System.Windows.Forms.ListView();
+            this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label10 = new System.Windows.Forms.Label();
+            this.pnlChangedAssemblies = new System.Windows.Forms.Panel();
+            this.lvChangedAssemblies = new System.Windows.Forms.ListView();
+            this.columnHeader15 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label11 = new System.Windows.Forms.Label();
+            this.lblChanges = new System.Windows.Forms.Label();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.accountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
+            this.treeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.pnlGitHub.SuspendLayout();
@@ -168,20 +185,20 @@
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.pnlTeamCity.SuspendLayout();
-            this.panel3.SuspendLayout();
+            this.pnlBuildGridAndDetails.SuspendLayout();
             this.pnlBuildDetails.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.pnlBuildGridButtons.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage3.SuspendLayout();
+            this.tabTeamCity.SuspendLayout();
+            this.tabJIRA.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.pnlTabControl.SuspendLayout();
+            this.pnlCommitAndDescription.SuspendLayout();
+            this.pnlCommits.SuspendLayout();
+            this.pnlChangesDisplay.SuspendLayout();
             this.pnlChangedFilesAndAssemblies.SuspendLayout();
             this.pnlChangedFiles.SuspendLayout();
             this.pnlChangedAssemblies.SuspendLayout();
-            this.pnlCommitAndDescription.SuspendLayout();
-            this.pnlCommits.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.pnlTabControl.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -192,7 +209,7 @@
             this.toolsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1164, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1336, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -228,9 +245,7 @@
             this.buildDetailsToolStripMenuItem,
             this.toolStripMenuItem4,
             this.changedFilesToolStripMenuItem,
-            this.toolStripMenuItem5,
-            this.updateJIRAPropertiesToolStripMenuItem,
-            this.updateCommitPropertiesToolStripMenuItem});
+            this.toolStripMenuItem5});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "&View";
@@ -238,14 +253,14 @@
             // refreshToolStripMenuItem
             // 
             this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.refreshToolStripMenuItem.Text = "Refresh Pull Requests";
             this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(210, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(206, 6);
             // 
             // pullRequestGridOptionsToolStripMenuItem
             // 
@@ -253,14 +268,14 @@
             this.pullRequestGridOptionsToolStripMenuItem.CheckOnClick = true;
             this.pullRequestGridOptionsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.pullRequestGridOptionsToolStripMenuItem.Name = "pullRequestGridOptionsToolStripMenuItem";
-            this.pullRequestGridOptionsToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.pullRequestGridOptionsToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.pullRequestGridOptionsToolStripMenuItem.Text = "Pull Request Grid Options";
             this.pullRequestGridOptionsToolStripMenuItem.CheckedChanged += new System.EventHandler(this.pullRequestGridOptionsToolStripMenuItem_CheckedChanged);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(210, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(206, 6);
             // 
             // teamCityBuildsToolStripMenuItem
             // 
@@ -268,7 +283,7 @@
             this.teamCityBuildsToolStripMenuItem.CheckOnClick = true;
             this.teamCityBuildsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.teamCityBuildsToolStripMenuItem.Name = "teamCityBuildsToolStripMenuItem";
-            this.teamCityBuildsToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.teamCityBuildsToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.teamCityBuildsToolStripMenuItem.Text = "Team City Builds";
             this.teamCityBuildsToolStripMenuItem.CheckedChanged += new System.EventHandler(this.teamCityBuildsToolStripMenuItem_CheckedChanged);
             // 
@@ -278,14 +293,14 @@
             this.buildDetailsToolStripMenuItem.CheckOnClick = true;
             this.buildDetailsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.buildDetailsToolStripMenuItem.Name = "buildDetailsToolStripMenuItem";
-            this.buildDetailsToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.buildDetailsToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.buildDetailsToolStripMenuItem.Text = "Build Details";
             this.buildDetailsToolStripMenuItem.CheckedChanged += new System.EventHandler(this.buildDetailsToolStripMenuItem_CheckedChanged);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(210, 6);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(206, 6);
             // 
             // changedFilesToolStripMenuItem
             // 
@@ -293,35 +308,22 @@
             this.changedFilesToolStripMenuItem.CheckOnClick = true;
             this.changedFilesToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.changedFilesToolStripMenuItem.Name = "changedFilesToolStripMenuItem";
-            this.changedFilesToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.changedFilesToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.changedFilesToolStripMenuItem.Text = "Changed Files";
             this.changedFilesToolStripMenuItem.CheckedChanged += new System.EventHandler(this.changedFilesToolStripMenuItem_CheckedChanged);
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(210, 6);
-            // 
-            // updateJIRAPropertiesToolStripMenuItem
-            // 
-            this.updateJIRAPropertiesToolStripMenuItem.Name = "updateJIRAPropertiesToolStripMenuItem";
-            this.updateJIRAPropertiesToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
-            this.updateJIRAPropertiesToolStripMenuItem.Text = "Update JIRA properties";
-            this.updateJIRAPropertiesToolStripMenuItem.Click += new System.EventHandler(this.updateJIRAPropertiesToolStripMenuItem_Click);
-            // 
-            // updateCommitPropertiesToolStripMenuItem
-            // 
-            this.updateCommitPropertiesToolStripMenuItem.Name = "updateCommitPropertiesToolStripMenuItem";
-            this.updateCommitPropertiesToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
-            this.updateCommitPropertiesToolStripMenuItem.Text = "Update commit properties";
-            this.updateCommitPropertiesToolStripMenuItem.Click += new System.EventHandler(this.updateCommitPropertiesToolStripMenuItem_Click);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(206, 6);
             // 
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.branchMonitorToolStripMenuItem,
             this.toolStripMenuItem6,
-            this.accountsToolStripMenuItem});
+            this.accountsToolStripMenuItem,
+            this.treeToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.toolsToolStripMenuItem.Text = "&Tools";
@@ -336,11 +338,23 @@
             this.branchMonitorToolStripMenuItem.Text = "Branch Monitor";
             this.branchMonitorToolStripMenuItem.CheckedChanged += new System.EventHandler(this.branchMonitorToolStripMenuItem_CheckedChanged);
             // 
+            // toolStripMenuItem6
+            // 
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(154, 6);
+            // 
+            // accountsToolStripMenuItem
+            // 
+            this.accountsToolStripMenuItem.Name = "accountsToolStripMenuItem";
+            this.accountsToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.accountsToolStripMenuItem.Text = "Accounts";
+            this.accountsToolStripMenuItem.Click += new System.EventHandler(this.accountsToolStripMenuItem_Click);
+            // 
             // toolStrip1
             // 
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1164, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1336, 25);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -356,7 +370,7 @@
             this.lblBranchMonitorStatus});
             this.statusStrip1.Location = new System.Drawing.Point(0, 624);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1164, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(1336, 24);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -424,7 +438,7 @@
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(187, 19);
+            this.lblStatus.Size = new System.Drawing.Size(359, 19);
             this.lblStatus.Spring = true;
             this.lblStatus.Text = "Ready";
             // 
@@ -456,7 +470,7 @@
             this.lvWork.HideSelection = false;
             this.lvWork.Location = new System.Drawing.Point(1, 75);
             this.lvWork.Name = "lvWork";
-            this.lvWork.Size = new System.Drawing.Size(1160, 194);
+            this.lvWork.Size = new System.Drawing.Size(1332, 194);
             this.lvWork.SmallImageList = this.gitHubGridImages;
             this.lvWork.TabIndex = 3;
             this.lvWork.UseCompatibleStateImageBehavior = false;
@@ -528,13 +542,13 @@
             this.pnlGitHub.Location = new System.Drawing.Point(0, 49);
             this.pnlGitHub.Name = "pnlGitHub";
             this.pnlGitHub.Padding = new System.Windows.Forms.Padding(1);
-            this.pnlGitHub.Size = new System.Drawing.Size(1164, 272);
+            this.pnlGitHub.Size = new System.Drawing.Size(1336, 272);
             this.pnlGitHub.TabIndex = 4;
             // 
             // btnShowHideGridOptions
             // 
             this.btnShowHideGridOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnShowHideGridOptions.Location = new System.Drawing.Point(1140, 2);
+            this.btnShowHideGridOptions.Location = new System.Drawing.Point(1312, 2);
             this.btnShowHideGridOptions.Name = "btnShowHideGridOptions";
             this.btnShowHideGridOptions.Size = new System.Drawing.Size(19, 20);
             this.btnShowHideGridOptions.TabIndex = 12;
@@ -551,7 +565,7 @@
             this.pnlGridOptions.Location = new System.Drawing.Point(1, 23);
             this.pnlGridOptions.Name = "pnlGridOptions";
             this.pnlGridOptions.Padding = new System.Windows.Forms.Padding(2);
-            this.pnlGridOptions.Size = new System.Drawing.Size(1160, 52);
+            this.pnlGridOptions.Size = new System.Drawing.Size(1332, 52);
             this.pnlGridOptions.TabIndex = 6;
             this.pnlGridOptions.VisibleChanged += new System.EventHandler(this.pnlGridOptions_VisibleChanged);
             // 
@@ -805,7 +819,7 @@
             this.label1.Dock = System.Windows.Forms.DockStyle.Top;
             this.label1.Location = new System.Drawing.Point(1, 1);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(1160, 22);
+            this.label1.Size = new System.Drawing.Size(1332, 22);
             this.label1.TabIndex = 5;
             this.label1.Text = "Pull Requests";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -814,20 +828,20 @@
             // 
             this.pnlTeamCity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlTeamCity.Controls.Add(this.btnHideBuildsPanel);
-            this.pnlTeamCity.Controls.Add(this.panel3);
-            this.pnlTeamCity.Controls.Add(this.panel2);
+            this.pnlTeamCity.Controls.Add(this.pnlBuildGridAndDetails);
+            this.pnlTeamCity.Controls.Add(this.pnlBuildGridButtons);
             this.pnlTeamCity.Controls.Add(this.label2);
-            this.pnlTeamCity.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlTeamCity.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlTeamCity.Location = new System.Drawing.Point(3, 3);
             this.pnlTeamCity.Name = "pnlTeamCity";
             this.pnlTeamCity.Padding = new System.Windows.Forms.Padding(1);
-            this.pnlTeamCity.Size = new System.Drawing.Size(663, 263);
+            this.pnlTeamCity.Size = new System.Drawing.Size(666, 263);
             this.pnlTeamCity.TabIndex = 6;
             // 
             // btnHideBuildsPanel
             // 
             this.btnHideBuildsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnHideBuildsPanel.Location = new System.Drawing.Point(638, 4);
+            this.btnHideBuildsPanel.Location = new System.Drawing.Point(641, 4);
             this.btnHideBuildsPanel.Name = "btnHideBuildsPanel";
             this.btnHideBuildsPanel.Size = new System.Drawing.Size(15, 15);
             this.btnHideBuildsPanel.TabIndex = 11;
@@ -835,15 +849,258 @@
             this.btnHideBuildsPanel.UseVisualStyleBackColor = true;
             this.btnHideBuildsPanel.Click += new System.EventHandler(this.btnHideBuildsPanel_Click);
             // 
-            // panel3
+            // pnlBuildGridAndDetails
             // 
-            this.panel3.Controls.Add(this.lvBuilds);
-            this.panel3.Controls.Add(this.pnlBuildDetails);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(1, 56);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(659, 204);
-            this.panel3.TabIndex = 10;
+            this.pnlBuildGridAndDetails.Controls.Add(this.pnlBuildDetails);
+            this.pnlBuildGridAndDetails.Controls.Add(this.splitter3);
+            this.pnlBuildGridAndDetails.Controls.Add(this.lvBuilds);
+            this.pnlBuildGridAndDetails.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlBuildGridAndDetails.Location = new System.Drawing.Point(1, 56);
+            this.pnlBuildGridAndDetails.Name = "pnlBuildGridAndDetails";
+            this.pnlBuildGridAndDetails.Size = new System.Drawing.Size(662, 204);
+            this.pnlBuildGridAndDetails.TabIndex = 10;
+            // 
+            // pnlBuildDetails
+            // 
+            this.pnlBuildDetails.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlBuildDetails.Controls.Add(this.label18);
+            this.pnlBuildDetails.Controls.Add(this.txtBuildDetailStatusText);
+            this.pnlBuildDetails.Controls.Add(this.label17);
+            this.pnlBuildDetails.Controls.Add(this.txtBuildDetailQueued);
+            this.pnlBuildDetails.Controls.Add(this.label16);
+            this.pnlBuildDetails.Controls.Add(this.txtChangeDev);
+            this.pnlBuildDetails.Controls.Add(this.label15);
+            this.pnlBuildDetails.Controls.Add(this.txtChangeVersion);
+            this.pnlBuildDetails.Controls.Add(this.label14);
+            this.pnlBuildDetails.Controls.Add(this.txtChangeId);
+            this.pnlBuildDetails.Controls.Add(this.label9);
+            this.pnlBuildDetails.Controls.Add(this.txtBuildDetailPlan);
+            this.pnlBuildDetails.Controls.Add(this.label8);
+            this.pnlBuildDetails.Controls.Add(this.txtBuildDetailDuration);
+            this.pnlBuildDetails.Controls.Add(this.label7);
+            this.pnlBuildDetails.Controls.Add(this.txtBuildDetailState);
+            this.pnlBuildDetails.Controls.Add(this.label6);
+            this.pnlBuildDetails.Controls.Add(this.txtBuildDetailFinished);
+            this.pnlBuildDetails.Controls.Add(this.label5);
+            this.pnlBuildDetails.Controls.Add(this.txtBuildDetailStatus);
+            this.pnlBuildDetails.Controls.Add(this.label4);
+            this.pnlBuildDetails.Controls.Add(this.btnHideBuildDetails);
+            this.pnlBuildDetails.Controls.Add(this.txtBuildDetailStarted);
+            this.pnlBuildDetails.Controls.Add(this.lblBuildDetails);
+            this.pnlBuildDetails.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlBuildDetails.Location = new System.Drawing.Point(0, 158);
+            this.pnlBuildDetails.Name = "pnlBuildDetails";
+            this.pnlBuildDetails.Size = new System.Drawing.Size(662, 46);
+            this.pnlBuildDetails.TabIndex = 9;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(199, 55);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(53, 13);
+            this.label18.TabIndex = 30;
+            this.label18.Text = "Message:";
+            // 
+            // txtBuildDetailStatusText
+            // 
+            this.txtBuildDetailStatusText.Location = new System.Drawing.Point(258, 51);
+            this.txtBuildDetailStatusText.Name = "txtBuildDetailStatusText";
+            this.txtBuildDetailStatusText.Size = new System.Drawing.Size(153, 20);
+            this.txtBuildDetailStatusText.TabIndex = 29;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(14, 29);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(48, 13);
+            this.label17.TabIndex = 28;
+            this.label17.Text = "Queued:";
+            // 
+            // txtBuildDetailQueued
+            // 
+            this.txtBuildDetailQueued.Location = new System.Drawing.Point(64, 25);
+            this.txtBuildDetailQueued.Name = "txtBuildDetailQueued";
+            this.txtBuildDetailQueued.Size = new System.Drawing.Size(131, 20);
+            this.txtBuildDetailQueued.TabIndex = 27;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(605, 80);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(30, 13);
+            this.label16.TabIndex = 26;
+            this.label16.Text = "Dev:";
+            // 
+            // txtChangeDev
+            // 
+            this.txtChangeDev.Location = new System.Drawing.Point(641, 76);
+            this.txtChangeDev.Name = "txtChangeDev";
+            this.txtChangeDev.Size = new System.Drawing.Size(131, 20);
+            this.txtChangeDev.TabIndex = 25;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(213, 80);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(44, 13);
+            this.label15.TabIndex = 24;
+            this.label15.Text = "Commit:";
+            // 
+            // txtChangeVersion
+            // 
+            this.txtChangeVersion.Location = new System.Drawing.Point(258, 76);
+            this.txtChangeVersion.Name = "txtChangeVersion";
+            this.txtChangeVersion.Size = new System.Drawing.Size(325, 20);
+            this.txtChangeVersion.TabIndex = 23;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(3, 80);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(59, 13);
+            this.label14.TabIndex = 22;
+            this.label14.Text = "Change Id:";
+            // 
+            // txtChangeId
+            // 
+            this.txtChangeId.Location = new System.Drawing.Point(64, 76);
+            this.txtChangeId.Name = "txtChangeId";
+            this.txtChangeId.Size = new System.Drawing.Size(131, 20);
+            this.txtChangeId.TabIndex = 21;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(601, 55);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(31, 13);
+            this.label9.TabIndex = 20;
+            this.label9.Text = "Plan:";
+            // 
+            // txtBuildDetailPlan
+            // 
+            this.txtBuildDetailPlan.Location = new System.Drawing.Point(641, 51);
+            this.txtBuildDetailPlan.Name = "txtBuildDetailPlan";
+            this.txtBuildDetailPlan.Size = new System.Drawing.Size(131, 20);
+            this.txtBuildDetailPlan.TabIndex = 19;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(585, 29);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(50, 13);
+            this.label8.TabIndex = 18;
+            this.label8.Text = "Duration:";
+            // 
+            // txtBuildDetailDuration
+            // 
+            this.txtBuildDetailDuration.Location = new System.Drawing.Point(641, 25);
+            this.txtBuildDetailDuration.Name = "txtBuildDetailDuration";
+            this.txtBuildDetailDuration.Size = new System.Drawing.Size(131, 20);
+            this.txtBuildDetailDuration.TabIndex = 17;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(417, 55);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(35, 13);
+            this.label7.TabIndex = 16;
+            this.label7.Text = "State:";
+            // 
+            // txtBuildDetailState
+            // 
+            this.txtBuildDetailState.Location = new System.Drawing.Point(452, 51);
+            this.txtBuildDetailState.Name = "txtBuildDetailState";
+            this.txtBuildDetailState.Size = new System.Drawing.Size(131, 20);
+            this.txtBuildDetailState.TabIndex = 15;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(403, 29);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(49, 13);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Finished:";
+            // 
+            // txtBuildDetailFinished
+            // 
+            this.txtBuildDetailFinished.Location = new System.Drawing.Point(452, 25);
+            this.txtBuildDetailFinished.Name = "txtBuildDetailFinished";
+            this.txtBuildDetailFinished.Size = new System.Drawing.Size(131, 20);
+            this.txtBuildDetailFinished.TabIndex = 13;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(22, 55);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(40, 13);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Status:";
+            // 
+            // txtBuildDetailStatus
+            // 
+            this.txtBuildDetailStatus.Location = new System.Drawing.Point(64, 51);
+            this.txtBuildDetailStatus.Name = "txtBuildDetailStatus";
+            this.txtBuildDetailStatus.Size = new System.Drawing.Size(131, 20);
+            this.txtBuildDetailStatus.TabIndex = 11;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(212, 29);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(44, 13);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Started:";
+            // 
+            // btnHideBuildDetails
+            // 
+            this.btnHideBuildDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnHideBuildDetails.Location = new System.Drawing.Point(638, 3);
+            this.btnHideBuildDetails.Name = "btnHideBuildDetails";
+            this.btnHideBuildDetails.Size = new System.Drawing.Size(15, 15);
+            this.btnHideBuildDetails.TabIndex = 9;
+            this.btnHideBuildDetails.Text = "^";
+            this.btnHideBuildDetails.UseVisualStyleBackColor = true;
+            this.btnHideBuildDetails.Click += new System.EventHandler(this.btnHideBuildDetails_Click);
+            // 
+            // txtBuildDetailStarted
+            // 
+            this.txtBuildDetailStarted.Location = new System.Drawing.Point(258, 25);
+            this.txtBuildDetailStarted.Name = "txtBuildDetailStarted";
+            this.txtBuildDetailStarted.Size = new System.Drawing.Size(131, 20);
+            this.txtBuildDetailStarted.TabIndex = 8;
+            // 
+            // lblBuildDetails
+            // 
+            this.lblBuildDetails.BackColor = System.Drawing.Color.Gainsboro;
+            this.lblBuildDetails.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblBuildDetails.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblBuildDetails.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.lblBuildDetails.Location = new System.Drawing.Point(0, 0);
+            this.lblBuildDetails.Name = "lblBuildDetails";
+            this.lblBuildDetails.Size = new System.Drawing.Size(658, 20);
+            this.lblBuildDetails.TabIndex = 7;
+            this.lblBuildDetails.Text = "Build Details";
+            this.lblBuildDetails.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // splitter3
+            // 
+            this.splitter3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.splitter3.Location = new System.Drawing.Point(0, 155);
+            this.splitter3.Name = "splitter3";
+            this.splitter3.Size = new System.Drawing.Size(662, 3);
+            this.splitter3.TabIndex = 10;
+            this.splitter3.TabStop = false;
             // 
             // lvBuilds
             // 
@@ -855,12 +1112,12 @@
             this.columnHeader7,
             this.columnHeader8,
             this.columnHeader11});
-            this.lvBuilds.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvBuilds.Dock = System.Windows.Forms.DockStyle.Top;
             this.lvBuilds.FullRowSelect = true;
             this.lvBuilds.HideSelection = false;
             this.lvBuilds.Location = new System.Drawing.Point(0, 0);
             this.lvBuilds.Name = "lvBuilds";
-            this.lvBuilds.Size = new System.Drawing.Size(659, 92);
+            this.lvBuilds.Size = new System.Drawing.Size(662, 155);
             this.lvBuilds.TabIndex = 8;
             this.lvBuilds.UseCompatibleStateImageBehavior = false;
             this.lvBuilds.View = System.Windows.Forms.View.Details;
@@ -898,222 +1155,101 @@
             this.columnHeader11.Text = "Plan";
             this.columnHeader11.Width = 150;
             // 
-            // pnlBuildDetails
+            // pnlBuildGridButtons
             // 
-            this.pnlBuildDetails.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlBuildDetails.Controls.Add(this.label9);
-            this.pnlBuildDetails.Controls.Add(this.txtBuildDetailPlan);
-            this.pnlBuildDetails.Controls.Add(this.label8);
-            this.pnlBuildDetails.Controls.Add(this.txtBuildDetailDuration);
-            this.pnlBuildDetails.Controls.Add(this.label7);
-            this.pnlBuildDetails.Controls.Add(this.txtBuildDetailState);
-            this.pnlBuildDetails.Controls.Add(this.label6);
-            this.pnlBuildDetails.Controls.Add(this.txtBuildDetailFinished);
-            this.pnlBuildDetails.Controls.Add(this.label5);
-            this.pnlBuildDetails.Controls.Add(this.txtBuildDetailStatus);
-            this.pnlBuildDetails.Controls.Add(this.label4);
-            this.pnlBuildDetails.Controls.Add(this.btnHideBuildDetails);
-            this.pnlBuildDetails.Controls.Add(this.txtBuildDetailStarted);
-            this.pnlBuildDetails.Controls.Add(this.lblBuildDetails);
-            this.pnlBuildDetails.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlBuildDetails.Location = new System.Drawing.Point(0, 92);
-            this.pnlBuildDetails.Name = "pnlBuildDetails";
-            this.pnlBuildDetails.Size = new System.Drawing.Size(659, 112);
-            this.pnlBuildDetails.TabIndex = 9;
+            this.pnlBuildGridButtons.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlBuildGridButtons.Controls.Add(this.btnScan);
+            this.pnlBuildGridButtons.Controls.Add(this.btnAdvantageBuilds);
+            this.pnlBuildGridButtons.Controls.Add(this.label3);
+            this.pnlBuildGridButtons.Controls.Add(this.btnPatchBuilds);
+            this.pnlBuildGridButtons.Controls.Add(this.txtPullRequestNumber);
+            this.pnlBuildGridButtons.Controls.Add(this.btnSearchBuilds);
+            this.pnlBuildGridButtons.Controls.Add(this.btnRunningBuilds);
+            this.pnlBuildGridButtons.Controls.Add(this.btnBuildHistory);
+            this.pnlBuildGridButtons.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlBuildGridButtons.Location = new System.Drawing.Point(1, 21);
+            this.pnlBuildGridButtons.Name = "pnlBuildGridButtons";
+            this.pnlBuildGridButtons.Size = new System.Drawing.Size(662, 35);
+            this.pnlBuildGridButtons.TabIndex = 7;
             // 
-            // label9
+            // btnScan
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(212, 80);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(31, 13);
-            this.label9.TabIndex = 20;
-            this.label9.Text = "Plan:";
+            this.btnScan.Location = new System.Drawing.Point(329, 4);
+            this.btnScan.Name = "btnScan";
+            this.btnScan.Size = new System.Drawing.Size(75, 23);
+            this.btnScan.TabIndex = 7;
+            this.btnScan.Text = "Sec. Scan";
+            this.btnScan.UseVisualStyleBackColor = true;
+            this.btnScan.Click += new System.EventHandler(this.btnScan_Click);
             // 
-            // txtBuildDetailPlan
+            // btnAdvantageBuilds
             // 
-            this.txtBuildDetailPlan.Location = new System.Drawing.Point(253, 76);
-            this.txtBuildDetailPlan.Name = "txtBuildDetailPlan";
-            this.txtBuildDetailPlan.Size = new System.Drawing.Size(131, 20);
-            this.txtBuildDetailPlan.TabIndex = 19;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(10, 79);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(50, 13);
-            this.label8.TabIndex = 18;
-            this.label8.Text = "Duration:";
-            // 
-            // txtBuildDetailDuration
-            // 
-            this.txtBuildDetailDuration.Location = new System.Drawing.Point(61, 75);
-            this.txtBuildDetailDuration.Name = "txtBuildDetailDuration";
-            this.txtBuildDetailDuration.Size = new System.Drawing.Size(131, 20);
-            this.txtBuildDetailDuration.TabIndex = 17;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(212, 53);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(35, 13);
-            this.label7.TabIndex = 16;
-            this.label7.Text = "State:";
-            // 
-            // txtBuildDetailState
-            // 
-            this.txtBuildDetailState.Location = new System.Drawing.Point(253, 49);
-            this.txtBuildDetailState.Name = "txtBuildDetailState";
-            this.txtBuildDetailState.Size = new System.Drawing.Size(131, 20);
-            this.txtBuildDetailState.TabIndex = 15;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(10, 53);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(49, 13);
-            this.label6.TabIndex = 14;
-            this.label6.Text = "Finished:";
-            // 
-            // txtBuildDetailFinished
-            // 
-            this.txtBuildDetailFinished.Location = new System.Drawing.Point(61, 49);
-            this.txtBuildDetailFinished.Name = "txtBuildDetailFinished";
-            this.txtBuildDetailFinished.Size = new System.Drawing.Size(131, 20);
-            this.txtBuildDetailFinished.TabIndex = 13;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(212, 27);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(40, 13);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Status:";
-            // 
-            // txtBuildDetailStatus
-            // 
-            this.txtBuildDetailStatus.Location = new System.Drawing.Point(253, 23);
-            this.txtBuildDetailStatus.Name = "txtBuildDetailStatus";
-            this.txtBuildDetailStatus.Size = new System.Drawing.Size(131, 20);
-            this.txtBuildDetailStatus.TabIndex = 11;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(10, 27);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(44, 13);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Started:";
-            // 
-            // btnHideBuildDetails
-            // 
-            this.btnHideBuildDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnHideBuildDetails.Location = new System.Drawing.Point(635, 3);
-            this.btnHideBuildDetails.Name = "btnHideBuildDetails";
-            this.btnHideBuildDetails.Size = new System.Drawing.Size(15, 15);
-            this.btnHideBuildDetails.TabIndex = 9;
-            this.btnHideBuildDetails.Text = "^";
-            this.btnHideBuildDetails.UseVisualStyleBackColor = true;
-            this.btnHideBuildDetails.Click += new System.EventHandler(this.btnHideBuildDetails_Click);
-            // 
-            // txtBuildDetailStarted
-            // 
-            this.txtBuildDetailStarted.Location = new System.Drawing.Point(61, 23);
-            this.txtBuildDetailStarted.Name = "txtBuildDetailStarted";
-            this.txtBuildDetailStarted.Size = new System.Drawing.Size(131, 20);
-            this.txtBuildDetailStarted.TabIndex = 8;
-            // 
-            // lblBuildDetails
-            // 
-            this.lblBuildDetails.BackColor = System.Drawing.Color.Gainsboro;
-            this.lblBuildDetails.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblBuildDetails.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblBuildDetails.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.lblBuildDetails.Location = new System.Drawing.Point(0, 0);
-            this.lblBuildDetails.Name = "lblBuildDetails";
-            this.lblBuildDetails.Size = new System.Drawing.Size(655, 20);
-            this.lblBuildDetails.TabIndex = 7;
-            this.lblBuildDetails.Text = "Build Details";
-            this.lblBuildDetails.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // panel2
-            // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.button4);
-            this.panel2.Controls.Add(this.txtPullRequestNumber);
-            this.panel2.Controls.Add(this.button3);
-            this.panel2.Controls.Add(this.button2);
-            this.panel2.Controls.Add(this.button1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(1, 21);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(659, 35);
-            this.panel2.TabIndex = 7;
+            this.btnAdvantageBuilds.Location = new System.Drawing.Point(248, 4);
+            this.btnAdvantageBuilds.Name = "btnAdvantageBuilds";
+            this.btnAdvantageBuilds.Size = new System.Drawing.Size(75, 23);
+            this.btnAdvantageBuilds.TabIndex = 6;
+            this.btnAdvantageBuilds.Text = "Advantage";
+            this.btnAdvantageBuilds.UseVisualStyleBackColor = true;
+            this.btnAdvantageBuilds.Click += new System.EventHandler(this.btnAdvantageBuilds_Click);
             // 
             // label3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(377, 9);
+            this.label3.Location = new System.Drawing.Point(380, 9);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(75, 13);
             this.label3.TabIndex = 5;
             this.label3.Text = "Branch Name:";
             // 
-            // button4
+            // btnPatchBuilds
             // 
-            this.button4.Location = new System.Drawing.Point(128, 4);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(55, 23);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "Patches";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.btnPatchBuilds.Location = new System.Drawing.Point(167, 4);
+            this.btnPatchBuilds.Name = "btnPatchBuilds";
+            this.btnPatchBuilds.Size = new System.Drawing.Size(75, 23);
+            this.btnPatchBuilds.TabIndex = 4;
+            this.btnPatchBuilds.Text = "Patches";
+            this.btnPatchBuilds.UseVisualStyleBackColor = true;
+            this.btnPatchBuilds.Click += new System.EventHandler(this.btnPatchBuilds_Click);
             // 
             // txtPullRequestNumber
             // 
             this.txtPullRequestNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPullRequestNumber.Location = new System.Drawing.Point(455, 5);
+            this.txtPullRequestNumber.Location = new System.Drawing.Point(458, 5);
             this.txtPullRequestNumber.Name = "txtPullRequestNumber";
             this.txtPullRequestNumber.Size = new System.Drawing.Size(131, 20);
             this.txtPullRequestNumber.TabIndex = 3;
             // 
-            // button3
+            // btnSearchBuilds
             // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Location = new System.Drawing.Point(594, 4);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(55, 23);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Search";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.btnSearchBuilds.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSearchBuilds.Location = new System.Drawing.Point(597, 4);
+            this.btnSearchBuilds.Name = "btnSearchBuilds";
+            this.btnSearchBuilds.Size = new System.Drawing.Size(55, 23);
+            this.btnSearchBuilds.TabIndex = 2;
+            this.btnSearchBuilds.Text = "Search";
+            this.btnSearchBuilds.UseVisualStyleBackColor = true;
+            this.btnSearchBuilds.Click += new System.EventHandler(this.btnSearchBuilds_Click);
             // 
-            // button2
+            // btnRunningBuilds
             // 
-            this.button2.Location = new System.Drawing.Point(67, 4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(55, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Running";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnRunningBuilds.Location = new System.Drawing.Point(86, 4);
+            this.btnRunningBuilds.Name = "btnRunningBuilds";
+            this.btnRunningBuilds.Size = new System.Drawing.Size(75, 23);
+            this.btnRunningBuilds.TabIndex = 1;
+            this.btnRunningBuilds.Text = "Running";
+            this.btnRunningBuilds.UseVisualStyleBackColor = true;
+            this.btnRunningBuilds.Click += new System.EventHandler(this.btnRunningBuilds_Click);
             // 
-            // button1
+            // btnBuildHistory
             // 
-            this.button1.Location = new System.Drawing.Point(5, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(55, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "History";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnBuildHistory.Location = new System.Drawing.Point(5, 4);
+            this.btnBuildHistory.Name = "btnBuildHistory";
+            this.btnBuildHistory.Size = new System.Drawing.Size(75, 23);
+            this.btnBuildHistory.TabIndex = 0;
+            this.btnBuildHistory.Text = "All";
+            this.btnBuildHistory.UseVisualStyleBackColor = true;
+            this.btnBuildHistory.Click += new System.EventHandler(this.btnBuildHistory_Click);
             // 
             // label2
             // 
@@ -1124,241 +1260,43 @@
             this.label2.ForeColor = System.Drawing.Color.RoyalBlue;
             this.label2.Location = new System.Drawing.Point(1, 1);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(659, 20);
+            this.label2.Size = new System.Drawing.Size(662, 20);
             this.label2.TabIndex = 6;
             this.label2.Text = "Builds";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabTeamCity);
+            this.tabControl1.Controls.Add(this.tabJIRA);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 8);
+            this.tabControl1.Location = new System.Drawing.Point(656, 8);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1164, 295);
+            this.tabControl1.Size = new System.Drawing.Size(680, 295);
             this.tabControl1.TabIndex = 7;
             // 
-            // tabPage1
+            // tabTeamCity
             // 
-            this.tabPage1.Controls.Add(this.pnlTeamCity);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1156, 269);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Builds";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabTeamCity.Controls.Add(this.pnlTeamCity);
+            this.tabTeamCity.Location = new System.Drawing.Point(4, 22);
+            this.tabTeamCity.Name = "tabTeamCity";
+            this.tabTeamCity.Padding = new System.Windows.Forms.Padding(3);
+            this.tabTeamCity.Size = new System.Drawing.Size(672, 269);
+            this.tabTeamCity.TabIndex = 0;
+            this.tabTeamCity.Text = "Builds";
+            this.tabTeamCity.UseVisualStyleBackColor = true;
             // 
-            // tabPage3
+            // tabJIRA
             // 
-            this.tabPage3.Controls.Add(this.pnlChangedFilesAndAssemblies);
-            this.tabPage3.Controls.Add(this.splitter2);
-            this.tabPage3.Controls.Add(this.pnlCommitAndDescription);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1156, 269);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Commits";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // pnlChangedFilesAndAssemblies
-            // 
-            this.pnlChangedFilesAndAssemblies.Controls.Add(this.pnlChangedFiles);
-            this.pnlChangedFilesAndAssemblies.Controls.Add(this.pnlChangedAssemblies);
-            this.pnlChangedFilesAndAssemblies.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlChangedFilesAndAssemblies.Location = new System.Drawing.Point(418, 0);
-            this.pnlChangedFilesAndAssemblies.Name = "pnlChangedFilesAndAssemblies";
-            this.pnlChangedFilesAndAssemblies.Padding = new System.Windows.Forms.Padding(2);
-            this.pnlChangedFilesAndAssemblies.Size = new System.Drawing.Size(738, 269);
-            this.pnlChangedFilesAndAssemblies.TabIndex = 3;
-            // 
-            // pnlChangedFiles
-            // 
-            this.pnlChangedFiles.BackColor = System.Drawing.Color.DarkKhaki;
-            this.pnlChangedFiles.Controls.Add(this.btnHideChangedFiles);
-            this.pnlChangedFiles.Controls.Add(this.lvChangedFiles);
-            this.pnlChangedFiles.Controls.Add(this.label10);
-            this.pnlChangedFiles.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlChangedFiles.Location = new System.Drawing.Point(2, 117);
-            this.pnlChangedFiles.Name = "pnlChangedFiles";
-            this.pnlChangedFiles.Padding = new System.Windows.Forms.Padding(4);
-            this.pnlChangedFiles.Size = new System.Drawing.Size(734, 150);
-            this.pnlChangedFiles.TabIndex = 1;
-            // 
-            // btnHideChangedFiles
-            // 
-            this.btnHideChangedFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnHideChangedFiles.Location = new System.Drawing.Point(712, 6);
-            this.btnHideChangedFiles.Name = "btnHideChangedFiles";
-            this.btnHideChangedFiles.Size = new System.Drawing.Size(15, 15);
-            this.btnHideChangedFiles.TabIndex = 12;
-            this.btnHideChangedFiles.Text = "^";
-            this.btnHideChangedFiles.UseVisualStyleBackColor = true;
-            this.btnHideChangedFiles.Click += new System.EventHandler(this.btnHideChangedFiles_Click);
-            // 
-            // lvChangedFiles
-            // 
-            this.lvChangedFiles.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader13});
-            this.lvChangedFiles.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvChangedFiles.FullRowSelect = true;
-            this.lvChangedFiles.Location = new System.Drawing.Point(4, 23);
-            this.lvChangedFiles.Name = "lvChangedFiles";
-            this.lvChangedFiles.Size = new System.Drawing.Size(726, 123);
-            this.lvChangedFiles.TabIndex = 0;
-            this.lvChangedFiles.UseCompatibleStateImageBehavior = false;
-            this.lvChangedFiles.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader13
-            // 
-            this.columnHeader13.Text = "File";
-            this.columnHeader13.Width = 450;
-            // 
-            // label10
-            // 
-            this.label10.BackColor = System.Drawing.Color.Khaki;
-            this.label10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label10.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label10.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label10.Location = new System.Drawing.Point(4, 4);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(726, 19);
-            this.label10.TabIndex = 0;
-            this.label10.Text = "Changed Files";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // pnlChangedAssemblies
-            // 
-            this.pnlChangedAssemblies.BackColor = System.Drawing.Color.SteelBlue;
-            this.pnlChangedAssemblies.Controls.Add(this.lvChangedAssemblies);
-            this.pnlChangedAssemblies.Controls.Add(this.label11);
-            this.pnlChangedAssemblies.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlChangedAssemblies.Location = new System.Drawing.Point(2, 2);
-            this.pnlChangedAssemblies.Name = "pnlChangedAssemblies";
-            this.pnlChangedAssemblies.Padding = new System.Windows.Forms.Padding(4);
-            this.pnlChangedAssemblies.Size = new System.Drawing.Size(734, 115);
-            this.pnlChangedAssemblies.TabIndex = 2;
-            // 
-            // lvChangedAssemblies
-            // 
-            this.lvChangedAssemblies.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader15});
-            this.lvChangedAssemblies.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvChangedAssemblies.FullRowSelect = true;
-            this.lvChangedAssemblies.Location = new System.Drawing.Point(4, 23);
-            this.lvChangedAssemblies.Name = "lvChangedAssemblies";
-            this.lvChangedAssemblies.Size = new System.Drawing.Size(726, 88);
-            this.lvChangedAssemblies.TabIndex = 0;
-            this.lvChangedAssemblies.UseCompatibleStateImageBehavior = false;
-            this.lvChangedAssemblies.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader15
-            // 
-            this.columnHeader15.Text = "Assembly";
-            this.columnHeader15.Width = 450;
-            // 
-            // label11
-            // 
-            this.label11.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.label11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label11.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label11.Location = new System.Drawing.Point(4, 4);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(726, 19);
-            this.label11.TabIndex = 0;
-            this.label11.Text = "Changed Assemblies";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // splitter2
-            // 
-            this.splitter2.Location = new System.Drawing.Point(415, 0);
-            this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(3, 269);
-            this.splitter2.TabIndex = 7;
-            this.splitter2.TabStop = false;
-            // 
-            // pnlCommitAndDescription
-            // 
-            this.pnlCommitAndDescription.Controls.Add(this.pnlCommits);
-            this.pnlCommitAndDescription.Controls.Add(this.txtCommitDescription);
-            this.pnlCommitAndDescription.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlCommitAndDescription.Location = new System.Drawing.Point(0, 0);
-            this.pnlCommitAndDescription.Name = "pnlCommitAndDescription";
-            this.pnlCommitAndDescription.Size = new System.Drawing.Size(415, 269);
-            this.pnlCommitAndDescription.TabIndex = 6;
-            // 
-            // pnlCommits
-            // 
-            this.pnlCommits.BackColor = System.Drawing.Color.SlateGray;
-            this.pnlCommits.Controls.Add(this.lvCommits);
-            this.pnlCommits.Controls.Add(this.label12);
-            this.pnlCommits.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlCommits.Location = new System.Drawing.Point(0, 0);
-            this.pnlCommits.Name = "pnlCommits";
-            this.pnlCommits.Padding = new System.Windows.Forms.Padding(4);
-            this.pnlCommits.Size = new System.Drawing.Size(415, 117);
-            this.pnlCommits.TabIndex = 5;
-            // 
-            // lvCommits
-            // 
-            this.lvCommits.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader14,
-            this.columnHeader16});
-            this.lvCommits.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvCommits.FullRowSelect = true;
-            this.lvCommits.Location = new System.Drawing.Point(4, 23);
-            this.lvCommits.Name = "lvCommits";
-            this.lvCommits.Size = new System.Drawing.Size(407, 90);
-            this.lvCommits.TabIndex = 0;
-            this.lvCommits.UseCompatibleStateImageBehavior = false;
-            this.lvCommits.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader14
-            // 
-            this.columnHeader14.Text = "Commit #";
-            this.columnHeader14.Width = 150;
-            // 
-            // columnHeader16
-            // 
-            this.columnHeader16.Text = "Description";
-            this.columnHeader16.Width = 250;
-            // 
-            // label12
-            // 
-            this.label12.BackColor = System.Drawing.Color.LightSlateGray;
-            this.label12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label12.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label12.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label12.Location = new System.Drawing.Point(4, 4);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(407, 19);
-            this.label12.TabIndex = 0;
-            this.label12.Text = "Commits";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // txtCommitDescription
-            // 
-            this.txtCommitDescription.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.txtCommitDescription.Location = new System.Drawing.Point(0, 117);
-            this.txtCommitDescription.Multiline = true;
-            this.txtCommitDescription.Name = "txtCommitDescription";
-            this.txtCommitDescription.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtCommitDescription.Size = new System.Drawing.Size(415, 152);
-            this.txtCommitDescription.TabIndex = 6;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.panel4);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1156, 269);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "JIRA";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabJIRA.Controls.Add(this.panel4);
+            this.tabJIRA.Location = new System.Drawing.Point(4, 22);
+            this.tabJIRA.Name = "tabJIRA";
+            this.tabJIRA.Padding = new System.Windows.Forms.Padding(3);
+            this.tabJIRA.Size = new System.Drawing.Size(672, 269);
+            this.tabJIRA.TabIndex = 1;
+            this.tabJIRA.Text = "JIRA";
+            this.tabJIRA.UseVisualStyleBackColor = true;
             // 
             // panel4
             // 
@@ -1369,7 +1307,7 @@
             this.panel4.Location = new System.Drawing.Point(3, 3);
             this.panel4.Name = "panel4";
             this.panel4.Padding = new System.Windows.Forms.Padding(4);
-            this.panel4.Size = new System.Drawing.Size(1150, 263);
+            this.panel4.Size = new System.Drawing.Size(666, 263);
             this.panel4.TabIndex = 6;
             // 
             // lvJira
@@ -1380,12 +1318,14 @@
             this.columnHeader19,
             this.columnHeader20,
             this.columnHeader21,
-            this.columnHeader22});
+            this.columnHeader22,
+            this.columnHeader12,
+            this.columnHeader28});
             this.lvJira.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvJira.FullRowSelect = true;
             this.lvJira.Location = new System.Drawing.Point(4, 23);
             this.lvJira.Name = "lvJira";
-            this.lvJira.Size = new System.Drawing.Size(1142, 236);
+            this.lvJira.Size = new System.Drawing.Size(658, 236);
             this.lvJira.TabIndex = 0;
             this.lvJira.UseCompatibleStateImageBehavior = false;
             this.lvJira.View = System.Windows.Forms.View.Details;
@@ -1419,6 +1359,16 @@
             // 
             this.columnHeader22.Text = "Priority";
             // 
+            // columnHeader12
+            // 
+            this.columnHeader12.Text = "Issue Type";
+            this.columnHeader12.Width = 80;
+            // 
+            // columnHeader28
+            // 
+            this.columnHeader28.Text = "Epic";
+            this.columnHeader28.Width = 125;
+            // 
             // label13
             // 
             this.label13.BackColor = System.Drawing.Color.AntiqueWhite;
@@ -1427,7 +1377,7 @@
             this.label13.ForeColor = System.Drawing.Color.Black;
             this.label13.Location = new System.Drawing.Point(4, 4);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(1142, 19);
+            this.label13.Size = new System.Drawing.Size(658, 19);
             this.label13.TabIndex = 0;
             this.label13.Text = "JIRA Issues";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1435,39 +1385,268 @@
             // pnlTabControl
             // 
             this.pnlTabControl.Controls.Add(this.tabControl1);
+            this.pnlTabControl.Controls.Add(this.splitter2);
+            this.pnlTabControl.Controls.Add(this.pnlCommitAndDescription);
+            this.pnlTabControl.Controls.Add(this.splitter4);
+            this.pnlTabControl.Controls.Add(this.pnlChangesDisplay);
             this.pnlTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlTabControl.Location = new System.Drawing.Point(0, 321);
             this.pnlTabControl.Name = "pnlTabControl";
             this.pnlTabControl.Padding = new System.Windows.Forms.Padding(0, 8, 0, 0);
-            this.pnlTabControl.Size = new System.Drawing.Size(1164, 303);
+            this.pnlTabControl.Size = new System.Drawing.Size(1336, 303);
             this.pnlTabControl.TabIndex = 8;
+            // 
+            // splitter2
+            // 
+            this.splitter2.Location = new System.Drawing.Point(653, 8);
+            this.splitter2.Name = "splitter2";
+            this.splitter2.Size = new System.Drawing.Size(3, 295);
+            this.splitter2.TabIndex = 10;
+            this.splitter2.TabStop = false;
+            // 
+            // pnlCommitAndDescription
+            // 
+            this.pnlCommitAndDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlCommitAndDescription.Controls.Add(this.splitter5);
+            this.pnlCommitAndDescription.Controls.Add(this.pnlCommits);
+            this.pnlCommitAndDescription.Controls.Add(this.txtCommitDescription);
+            this.pnlCommitAndDescription.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlCommitAndDescription.Location = new System.Drawing.Point(357, 8);
+            this.pnlCommitAndDescription.Name = "pnlCommitAndDescription";
+            this.pnlCommitAndDescription.Padding = new System.Windows.Forms.Padding(4);
+            this.pnlCommitAndDescription.Size = new System.Drawing.Size(296, 295);
+            this.pnlCommitAndDescription.TabIndex = 7;
+            // 
+            // splitter5
+            // 
+            this.splitter5.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.splitter5.Location = new System.Drawing.Point(4, 144);
+            this.splitter5.Name = "splitter5";
+            this.splitter5.Size = new System.Drawing.Size(286, 3);
+            this.splitter5.TabIndex = 7;
+            this.splitter5.TabStop = false;
+            // 
+            // pnlCommits
+            // 
+            this.pnlCommits.BackColor = System.Drawing.Color.SlateGray;
+            this.pnlCommits.Controls.Add(this.lvCommits);
+            this.pnlCommits.Controls.Add(this.label12);
+            this.pnlCommits.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlCommits.Location = new System.Drawing.Point(4, 4);
+            this.pnlCommits.Name = "pnlCommits";
+            this.pnlCommits.Padding = new System.Windows.Forms.Padding(4);
+            this.pnlCommits.Size = new System.Drawing.Size(286, 143);
+            this.pnlCommits.TabIndex = 5;
+            // 
+            // lvCommits
+            // 
+            this.lvCommits.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader14,
+            this.columnHeader16});
+            this.lvCommits.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvCommits.FullRowSelect = true;
+            this.lvCommits.Location = new System.Drawing.Point(4, 23);
+            this.lvCommits.Name = "lvCommits";
+            this.lvCommits.Size = new System.Drawing.Size(278, 116);
+            this.lvCommits.TabIndex = 0;
+            this.lvCommits.UseCompatibleStateImageBehavior = false;
+            this.lvCommits.View = System.Windows.Forms.View.Details;
+            this.lvCommits.SelectedIndexChanged += new System.EventHandler(this.lvCommits_SelectedIndexChanged);
+            // 
+            // columnHeader14
+            // 
+            this.columnHeader14.Text = "Commit #";
+            this.columnHeader14.Width = 80;
+            // 
+            // columnHeader16
+            // 
+            this.columnHeader16.Text = "Description";
+            this.columnHeader16.Width = 250;
+            // 
+            // label12
+            // 
+            this.label12.BackColor = System.Drawing.Color.LightSlateGray;
+            this.label12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label12.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label12.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label12.Location = new System.Drawing.Point(4, 4);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(278, 19);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "Commits";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtCommitDescription
+            // 
+            this.txtCommitDescription.AcceptsReturn = true;
+            this.txtCommitDescription.AcceptsTab = true;
+            this.txtCommitDescription.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.txtCommitDescription.Location = new System.Drawing.Point(4, 147);
+            this.txtCommitDescription.Multiline = true;
+            this.txtCommitDescription.Name = "txtCommitDescription";
+            this.txtCommitDescription.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtCommitDescription.Size = new System.Drawing.Size(286, 142);
+            this.txtCommitDescription.TabIndex = 6;
+            // 
+            // splitter4
+            // 
+            this.splitter4.Location = new System.Drawing.Point(354, 8);
+            this.splitter4.Name = "splitter4";
+            this.splitter4.Size = new System.Drawing.Size(3, 295);
+            this.splitter4.TabIndex = 9;
+            this.splitter4.TabStop = false;
+            // 
+            // pnlChangesDisplay
+            // 
+            this.pnlChangesDisplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlChangesDisplay.Controls.Add(this.btnHideChangedFilesAndAssemblies);
+            this.pnlChangesDisplay.Controls.Add(this.pnlChangedFilesAndAssemblies);
+            this.pnlChangesDisplay.Controls.Add(this.lblChanges);
+            this.pnlChangesDisplay.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlChangesDisplay.Location = new System.Drawing.Point(0, 8);
+            this.pnlChangesDisplay.Name = "pnlChangesDisplay";
+            this.pnlChangesDisplay.Size = new System.Drawing.Size(354, 295);
+            this.pnlChangesDisplay.TabIndex = 8;
+            // 
+            // btnHideChangedFilesAndAssemblies
+            // 
+            this.btnHideChangedFilesAndAssemblies.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnHideChangedFilesAndAssemblies.Location = new System.Drawing.Point(327, 1);
+            this.btnHideChangedFilesAndAssemblies.Name = "btnHideChangedFilesAndAssemblies";
+            this.btnHideChangedFilesAndAssemblies.Size = new System.Drawing.Size(22, 23);
+            this.btnHideChangedFilesAndAssemblies.TabIndex = 6;
+            this.btnHideChangedFilesAndAssemblies.Text = "<";
+            this.btnHideChangedFilesAndAssemblies.UseVisualStyleBackColor = true;
+            this.btnHideChangedFilesAndAssemblies.Click += new System.EventHandler(this.btnHideChangedFilesAndAssemblies_Click);
+            // 
+            // pnlChangedFilesAndAssemblies
+            // 
+            this.pnlChangedFilesAndAssemblies.Controls.Add(this.pnlChangedFiles);
+            this.pnlChangedFilesAndAssemblies.Controls.Add(this.pnlChangedAssemblies);
+            this.pnlChangedFilesAndAssemblies.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlChangedFilesAndAssemblies.Location = new System.Drawing.Point(0, 26);
+            this.pnlChangedFilesAndAssemblies.Name = "pnlChangedFilesAndAssemblies";
+            this.pnlChangedFilesAndAssemblies.Padding = new System.Windows.Forms.Padding(2);
+            this.pnlChangedFilesAndAssemblies.Size = new System.Drawing.Size(352, 267);
+            this.pnlChangedFilesAndAssemblies.TabIndex = 4;
+            // 
+            // pnlChangedFiles
+            // 
+            this.pnlChangedFiles.BackColor = System.Drawing.Color.DarkKhaki;
+            this.pnlChangedFiles.Controls.Add(this.lvChangedFiles);
+            this.pnlChangedFiles.Controls.Add(this.label10);
+            this.pnlChangedFiles.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlChangedFiles.Location = new System.Drawing.Point(2, 117);
+            this.pnlChangedFiles.Name = "pnlChangedFiles";
+            this.pnlChangedFiles.Padding = new System.Windows.Forms.Padding(4);
+            this.pnlChangedFiles.Size = new System.Drawing.Size(348, 148);
+            this.pnlChangedFiles.TabIndex = 1;
+            // 
+            // lvChangedFiles
+            // 
+            this.lvChangedFiles.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader13});
+            this.lvChangedFiles.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvChangedFiles.FullRowSelect = true;
+            this.lvChangedFiles.Location = new System.Drawing.Point(4, 23);
+            this.lvChangedFiles.Name = "lvChangedFiles";
+            this.lvChangedFiles.Size = new System.Drawing.Size(340, 121);
+            this.lvChangedFiles.TabIndex = 0;
+            this.lvChangedFiles.UseCompatibleStateImageBehavior = false;
+            this.lvChangedFiles.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader13
+            // 
+            this.columnHeader13.Text = "File";
+            this.columnHeader13.Width = 450;
+            // 
+            // label10
+            // 
+            this.label10.BackColor = System.Drawing.Color.Khaki;
+            this.label10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label10.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label10.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label10.Location = new System.Drawing.Point(4, 4);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(340, 19);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "Files";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pnlChangedAssemblies
+            // 
+            this.pnlChangedAssemblies.BackColor = System.Drawing.Color.SteelBlue;
+            this.pnlChangedAssemblies.Controls.Add(this.lvChangedAssemblies);
+            this.pnlChangedAssemblies.Controls.Add(this.label11);
+            this.pnlChangedAssemblies.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlChangedAssemblies.Location = new System.Drawing.Point(2, 2);
+            this.pnlChangedAssemblies.Name = "pnlChangedAssemblies";
+            this.pnlChangedAssemblies.Padding = new System.Windows.Forms.Padding(4);
+            this.pnlChangedAssemblies.Size = new System.Drawing.Size(348, 115);
+            this.pnlChangedAssemblies.TabIndex = 2;
+            // 
+            // lvChangedAssemblies
+            // 
+            this.lvChangedAssemblies.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader15});
+            this.lvChangedAssemblies.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvChangedAssemblies.FullRowSelect = true;
+            this.lvChangedAssemblies.Location = new System.Drawing.Point(4, 23);
+            this.lvChangedAssemblies.Name = "lvChangedAssemblies";
+            this.lvChangedAssemblies.Size = new System.Drawing.Size(340, 88);
+            this.lvChangedAssemblies.TabIndex = 0;
+            this.lvChangedAssemblies.UseCompatibleStateImageBehavior = false;
+            this.lvChangedAssemblies.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader15
+            // 
+            this.columnHeader15.Text = "Assembly";
+            this.columnHeader15.Width = 450;
+            // 
+            // label11
+            // 
+            this.label11.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.label11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label11.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label11.Location = new System.Drawing.Point(4, 4);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(340, 19);
+            this.label11.TabIndex = 0;
+            this.label11.Text = "Assemblies";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblChanges
+            // 
+            this.lblChanges.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblChanges.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblChanges.Location = new System.Drawing.Point(0, 0);
+            this.lblChanges.Name = "lblChanges";
+            this.lblChanges.Size = new System.Drawing.Size(352, 26);
+            this.lblChanges.TabIndex = 5;
+            this.lblChanges.Text = "Changed Files and Assemblies";
+            this.lblChanges.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // splitter1
             // 
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
             this.splitter1.Location = new System.Drawing.Point(0, 321);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(1164, 3);
+            this.splitter1.Size = new System.Drawing.Size(1336, 3);
             this.splitter1.TabIndex = 9;
             this.splitter1.TabStop = false;
             // 
-            // accountsToolStripMenuItem
+            // treeToolStripMenuItem
             // 
-            this.accountsToolStripMenuItem.Name = "accountsToolStripMenuItem";
-            this.accountsToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
-            this.accountsToolStripMenuItem.Text = "Accounts";
-            this.accountsToolStripMenuItem.Click += new System.EventHandler(this.accountsToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem6
-            // 
-            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(154, 6);
+            this.treeToolStripMenuItem.Name = "treeToolStripMenuItem";
+            this.treeToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.treeToolStripMenuItem.Text = "tree";
+            this.treeToolStripMenuItem.Click += new System.EventHandler(this.treeToolStripMenuItem_Click);
             // 
             // CodeManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1164, 648);
+            this.ClientSize = new System.Drawing.Size(1336, 648);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.pnlTabControl);
             this.Controls.Add(this.pnlGitHub);
@@ -1491,23 +1670,23 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.pnlTeamCity.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
+            this.pnlBuildGridAndDetails.ResumeLayout(false);
             this.pnlBuildDetails.ResumeLayout(false);
             this.pnlBuildDetails.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.pnlBuildGridButtons.ResumeLayout(false);
+            this.pnlBuildGridButtons.PerformLayout();
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
-            this.pnlChangedFilesAndAssemblies.ResumeLayout(false);
-            this.pnlChangedFiles.ResumeLayout(false);
-            this.pnlChangedAssemblies.ResumeLayout(false);
+            this.tabTeamCity.ResumeLayout(false);
+            this.tabJIRA.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.pnlTabControl.ResumeLayout(false);
             this.pnlCommitAndDescription.ResumeLayout(false);
             this.pnlCommitAndDescription.PerformLayout();
             this.pnlCommits.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.pnlTabControl.ResumeLayout(false);
+            this.pnlChangesDisplay.ResumeLayout(false);
+            this.pnlChangedFilesAndAssemblies.ResumeLayout(false);
+            this.pnlChangedFiles.ResumeLayout(false);
+            this.pnlChangedAssemblies.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1555,22 +1734,22 @@
         private System.Windows.Forms.ToolStripMenuItem teamCityBuildsToolStripMenuItem;
         private System.Windows.Forms.Panel pnlTeamCity;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel pnlBuildGridButtons;
+        private System.Windows.Forms.Button btnBuildHistory;
         private System.Windows.Forms.ListView lvBuilds;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.ColumnHeader columnHeader8;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnRunningBuilds;
         private System.Windows.Forms.ColumnHeader columnHeader9;
         private System.Windows.Forms.ColumnHeader columnHeader10;
         private System.Windows.Forms.ColumnHeader columnHeader11;
         private System.Windows.Forms.TextBox txtPullRequestNumber;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnSearchBuilds;
+        private System.Windows.Forms.Button btnPatchBuilds;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel pnlBuildGridAndDetails;
         private System.Windows.Forms.Panel pnlBuildDetails;
         private System.Windows.Forms.Label lblBuildDetails;
         private System.Windows.Forms.TextBox txtBuildDetailStarted;
@@ -1589,8 +1768,8 @@
         private System.Windows.Forms.TextBox txtBuildDetailPlan;
         private System.Windows.Forms.Button btnHideBuildsPanel;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabTeamCity;
+        private System.Windows.Forms.TabPage tabJIRA;
         private System.Windows.Forms.Panel pnlTabControl;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.CheckBox chkFilterCloud;
@@ -1601,23 +1780,8 @@
         private System.Windows.Forms.Button btnShowHideGridOptions;
         private System.Windows.Forms.ToolStripMenuItem pullRequestGridOptionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.Panel pnlChangedFilesAndAssemblies;
-        private System.Windows.Forms.Panel pnlChangedFiles;
-        private System.Windows.Forms.ListView lvChangedFiles;
-        private System.Windows.Forms.ColumnHeader columnHeader13;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Panel pnlChangedAssemblies;
-        private System.Windows.Forms.ListView lvChangedAssemblies;
-        private System.Windows.Forms.ColumnHeader columnHeader15;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem changedFilesToolStripMenuItem;
-        private System.Windows.Forms.Panel pnlCommits;
-        private System.Windows.Forms.ListView lvCommits;
-        private System.Windows.Forms.ColumnHeader columnHeader14;
-        private System.Windows.Forms.ColumnHeader columnHeader16;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.ListView lvJira;
         private System.Windows.Forms.ColumnHeader columnHeader17;
@@ -1627,10 +1791,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader20;
         private System.Windows.Forms.ColumnHeader columnHeader21;
         private System.Windows.Forms.ColumnHeader columnHeader22;
-        private System.Windows.Forms.Panel pnlCommitAndDescription;
-        private System.Windows.Forms.Splitter splitter2;
-        private System.Windows.Forms.TextBox txtCommitDescription;
-        private System.Windows.Forms.Button btnHideChangedFiles;
         private System.Windows.Forms.ColumnHeader columnHeader23;
         private System.Windows.Forms.ColumnHeader columnHeader24;
         private System.Windows.Forms.RadioButton radioButton1;
@@ -1641,10 +1801,46 @@
         private System.Windows.Forms.ColumnHeader columnHeader27;
         private System.Windows.Forms.ImageList gitHubGridImages;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
-        private System.Windows.Forms.ToolStripMenuItem updateJIRAPropertiesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem updateCommitPropertiesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
         private System.Windows.Forms.ToolStripMenuItem accountsToolStripMenuItem;
+        private System.Windows.Forms.ColumnHeader columnHeader12;
+        private System.Windows.Forms.ColumnHeader columnHeader28;
+        private System.Windows.Forms.Button btnAdvantageBuilds;
+        private System.Windows.Forms.Button btnScan;
+        private System.Windows.Forms.Splitter splitter3;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox txtChangeVersion;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox txtChangeId;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox txtBuildDetailQueued;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox txtChangeDev;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox txtBuildDetailStatusText;
+        private System.Windows.Forms.Panel pnlChangesDisplay;
+        private System.Windows.Forms.Label lblChanges;
+        private System.Windows.Forms.Panel pnlChangedFilesAndAssemblies;
+        private System.Windows.Forms.Panel pnlChangedFiles;
+        private System.Windows.Forms.ListView lvChangedFiles;
+        private System.Windows.Forms.ColumnHeader columnHeader13;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Panel pnlChangedAssemblies;
+        private System.Windows.Forms.ListView lvChangedAssemblies;
+        private System.Windows.Forms.ColumnHeader columnHeader15;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button btnHideChangedFilesAndAssemblies;
+        private System.Windows.Forms.Splitter splitter4;
+        private System.Windows.Forms.Panel pnlCommitAndDescription;
+        private System.Windows.Forms.Panel pnlCommits;
+        private System.Windows.Forms.ListView lvCommits;
+        private System.Windows.Forms.ColumnHeader columnHeader14;
+        private System.Windows.Forms.ColumnHeader columnHeader16;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox txtCommitDescription;
+        private System.Windows.Forms.Splitter splitter2;
+        private System.Windows.Forms.Splitter splitter5;
+        private System.Windows.Forms.ToolStripMenuItem treeToolStripMenuItem;
     }
 }
 

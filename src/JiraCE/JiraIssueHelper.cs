@@ -1,5 +1,7 @@
 ﻿using Atlassian.Jira;
+using static CETools.Common;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace JiraHelper
@@ -106,6 +108,76 @@ namespace JiraHelper
             catch { } // just dismiss errors but return false
             return false;
         }
+        #endregion
+
+        #region public helper methods
+        public static IList<string> GetJiraIssueNumbers(string body)
+        {
+            var issueNumbers = new List<string>();
+
+            foreach (var repoName in JiraIssuePrefixes)
+            {
+                var tokenLength = repoName.Length;
+
+                body = body.ToUpper();
+
+                if (body.Contains(repoName))
+                {
+                    for (int i = 0; i < body.Length - tokenLength; i++)
+                    {
+                        if (body.Substring(i, tokenLength) == repoName)
+                        {
+                            var issueNumberBuffer = String.Empty;
+                            var nextIdx = 0;
+                            // add 1 for the '-' character. (Sometimes it is a different character, so we don't hard-code it.)
+                            var textSection = body.Substring(i + tokenLength + 1);
+                            while (GetNumberValue(textSection, ref issueNumberBuffer, ref nextIdx))
+                            {
+                                if (!issueNumbers.Contains(issueNumberBuffer) && !String.IsNullOrEmpty(issueNumberBuffer))
+                                {
+                                    //issueNumbers.Add(issueNumberBuffer);
+                                    issueNumbers.Add(String.Format("{0}-{1}", repoName, issueNumberBuffer));
+                                }
+
+                                if ("," == body.Substring(nextIdx + i + tokenLength - 1, 1))
+                                {
+                                    textSection = body.Substring(nextIdx + i + tokenLength);
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return issueNumbers.Where(i => !String.IsNullOrEmpty(i)).ToList();
+        }
+        #endregion
+
+        #region private
+        private static bool GetNumberValue(string buffer, ref string numberValue, ref int nextIdx)
+        {
+            int digitLength = 0;
+            for (int i = 0; i < buffer.Length; i++)
+            {
+                var digitBuffer = buffer.Substring(i, 1);
+                if (digitBuffer != " ")
+                {
+                    if (!digitBuffer.All(Char.IsDigit))
+                    {
+                        numberValue = buffer.Substring(i - digitLength, digitLength).Trim();
+                        nextIdx = i + 1;
+                        return true;
+                    }
+                }
+                digitLength++;
+            }
+            return false;
+        }
+
         #endregion
 
         #region IDisposable

@@ -2,6 +2,7 @@
 using CECodeManager.Dialogs;
 using CECodeManager.Models;
 using CECodeManager.Properties;
+using static CETools.Common;
 using DbVersionLibrary;
 using GitHubHelper;
 using JiraHelper;
@@ -10,12 +11,10 @@ using Octokit;
 using PfsConnectMonitor;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TeamCityService;
@@ -30,6 +29,7 @@ namespace CECodeManager
         private CEGitHubClient _gitHubRepoHelper;
         private IList<string> _repoNames;
         private List<WorkItemView> _workItems;
+        private IList<WorkItemView> _filteredWorkItems;
         private JiraIssueHelper _jiraHelper;
         #endregion
 
@@ -208,6 +208,653 @@ namespace CECodeManager
         }
         #endregion
 
+        #region changed files and assemblies
+        private void btnHideChangedFilesAndAssemblies_Click(object sender, EventArgs e)
+        {
+            changedFilesToolStripMenuItem.Checked = false;
+        }
+        #endregion
+
+        #region TeamCity
+        private void btnHideBuildsPanel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                buildDetailsToolStripMenuItem.Checked = false;
+                teamCityBuildsToolStripMenuItem.Checked = false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+        private void teamCityBuildsToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                bool isChecked = ((ToolStripMenuItem)sender).Checked;
+                this.pnlTeamCity.Visible = isChecked;
+                buildDetailsToolStripMenuItem.Checked = isChecked;
+                buildDetailsToolStripMenuItem.Enabled = isChecked;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+
+        #region running builds
+        // get running builds button
+        private void btnRunningBuilds_Click(object sender, EventArgs e)
+        {
+            ShowRunningBuilds();
+        }
+        private void ShowRunningBuilds()
+        {
+            var runningBuilds = GetRunningBuilds(null);
+            DisplayRunningBuilds(runningBuilds, true);
+        }
+
+        private List<RunningBuild.Build> GetRunningBuilds(string branchName)
+        {
+            List<RunningBuild.Build> filteredRunningBuilds = new List<RunningBuild.Build>();
+            try
+            {
+                SetAppStatusDisplay("Reading running builds from TeamCity...");
+                var runningBuilds = GetAllRunningBuilds();
+                filteredRunningBuilds = new List<RunningBuild.Build>();
+
+                if (null != runningBuilds && runningBuilds.Count > 0)
+                {
+                    if (String.IsNullOrEmpty(branchName))
+                    {
+                        filteredRunningBuilds.AddRange(runningBuilds);
+                    }
+                    else
+                    {
+                        foreach (var build in runningBuilds)
+                        {
+                            if (build.branchName == branchName)
+                                filteredRunningBuilds.Add(build);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            return filteredRunningBuilds;
+        }
+        private IList<RunningBuild.Build> GetAllRunningBuilds()
+        {
+            var tc = new TeamCity();
+            var builds = tc.GetRunningBuilds();
+            return builds;
+        }
+
+        // display running builds
+        private void DisplayRunningBuilds(IList<RunningBuild.Build> builds)
+        {
+            DisplayRunningBuilds(builds, true);
+        }
+        private void DisplayRunningBuilds(IList<RunningBuild.Build> builds, bool clearGrid)
+        {
+            if (clearGrid) lvBuilds.Items.Clear();
+
+            if (null == builds || builds.Count == 0) return;
+
+            foreach (var item in builds)
+            {
+                var lvi = new ListViewItem(
+                    new string[] {
+                            item.id.ToString() ,
+                            item.percentageComplete.ToString(),
+                            item.number,
+                            item.branchName,
+                            item.status,
+                            item.state,
+                            item.buildTypeId
+                        });
+                lvi.Tag = item;
+                lvBuilds.Items.Add(lvi);
+            }
+
+            lvBuilds.SelectedIndices.Add(0);
+            ShowBuildDetails();
+        }
+        #endregion
+
+        #region completed builds
+        #region build history
+        // get build history button
+        private void btnBuildHistory_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var builds = GetBuilds();
+
+                UpdateWorkItemBuilds(builds);
+
+                DisplayBuilds(builds);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+        private IList<Build> GetBuilds()
+        {
+            var tc = new TeamCity();
+            var builds = tc.GetBuilds();
+            return builds;
+        }
+        #endregion
+
+        #region patch build history
+        // get patch builds button
+        private void btnPatchBuilds_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var builds = GetPatchBuilds();
+
+                UpdateWorkItemBuilds(builds);
+
+                DisplayBuilds(builds);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+        private IList<Build> GetPatchBuilds()
+        {
+            var tc = new TeamCity();
+            var builds = tc.GetPatchBuilds();
+            return builds;
+        }
+        #endregion
+
+        #region advantage build history
+        private void btnAdvantageBuilds_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var builds = GetAdvantageBuilds();
+
+                UpdateWorkItemBuilds(builds);
+
+                DisplayBuilds(builds);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+        private IList<Build> GetAdvantageBuilds()
+        {
+            var tc = new TeamCity();
+            var builds = tc.GetAdvantageBuilds();
+            return builds;
+        }
+        #endregion
+
+        #region security scan build history
+        private void btnScan_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var builds = GetSecurityScanBuilds();
+
+                DisplayBuilds(builds);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+        private IList<Build> GetSecurityScanBuilds()
+        {
+            var tc = new TeamCity();
+            var builds = tc.GetSecurityScanBuilds();
+            return builds;
+        }
+        #endregion
+
+        private void UpdateWorkItemBuilds(IList<Build> builds)
+        {
+            foreach (var build in builds)
+            {
+
+                IList<BuildChange> changes = GetBuildChangeList(build.id);
+
+                //BuildDetails buildDetails = GetBuildDetails(build.id);
+
+                //// parse commit:
+                //// https://api.github.com/repos/CenterEdge/Advantage/git/commits/b952a1f6d474d4f18d0a6a347627ef966d3fe07d
+                //var urlSections = commitTask.Url.Split('/');
+                //var commitId = urlSections[urlSections.Length - 1];
+
+                if (null != changes && changes.Count > 0)
+                {
+                    var buildCommits = changes.Select(r => r.version).ToList();
+
+                    foreach (var workItem in _workItems)
+                    {
+                        foreach (var commit in workItem.Commits)
+                        {
+                            var urlSections = commit.Url.Split('/');
+                            var commitId = urlSections[urlSections.Length - 1];
+                            if (buildCommits.Contains(commitId))
+                            {
+                                if (!workItem.Builds.Any(b => b.id == build.id))
+                                    workItem.Builds.Add(build);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        #region search builds
+        // search builds button
+        private void btnSearchBuilds_Click(object sender, EventArgs e)
+        {
+            SearchBuilds();
+        }
+        private void SearchBuilds()
+        {
+            try
+            {
+                var builds = GetBuildsByBranch(txtPullRequestNumber.Text);
+
+                UpdateWorkItemBuilds(builds);
+
+                DisplayBuilds(builds);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+        private IList<Build> GetBuildsByBranch(string branch)
+        {
+            var tc = new TeamCity();
+            var builds = tc.GetBranchBuilds(branch);
+            return builds;
+        }
+        #endregion
+
+        // display completed builds
+        private void DisplayBuilds(IList<Build> builds)
+        {
+            DisplayBuilds(builds, true);
+        }
+        private void DisplayBuilds(IList<Build> builds, bool clearGrid)
+        {
+            if (clearGrid) lvBuilds.Items.Clear();
+
+            if (null == builds || builds.Count == 0) return;
+
+            foreach (var item in builds)
+            {
+                var lvi = new ListViewItem(
+                    new string[] {
+                            item.id.ToString() ,
+                            "Done",
+                            item.number,
+                            item.branchName,
+                            item.status,
+                            item.state,
+                            item.buildTypeId,
+                        });
+                lvi.Tag = item;
+                lvBuilds.Items.Add(lvi);
+
+                //var changes = GetBuildChanges(Convert.ToInt32(item.id));
+                //if (null != changes && null != changes.files && null != changes.files.file)
+                //{
+                //    foreach (var changedFile in changes.files.file)
+                //    {
+                //        var lvi2 = new ListViewItem(System.IO.Path.GetFileName(changedFile.file));
+                //        lvi2.SubItems.Add(changedFile.file);
+                //        lvChangedFiles.Items.Add(lvi2);
+                //    }
+                //}
+            }
+        }
+        #endregion
+
+        #region build details
+        // show build details
+        private void lvBuilds_DoubleClick(object sender, EventArgs e)
+        {
+            ShowBuildDetails();
+        }
+        private void ShowBuildDetails()
+        {
+            try
+            {
+                pnlBuildDetails.Visible = true;
+
+                if (lvBuilds.SelectedItems.Count == 0) return;
+
+                var selected = lvBuilds.SelectedItems[0].Tag;
+
+                int selectedBuildId = -1;
+
+                if (selected is Build)
+                {
+                    selectedBuildId = ((Build)selected).id;
+                }
+                else if (selected is RunningBuild.Build)
+                {
+                    selectedBuildId = ((RunningBuild.Build)selected).id;
+                }
+
+                BuildDetails buildDetails = GetBuildDetails(selectedBuildId);
+
+                DisplayBuildDetails(buildDetails);
+
+                //if (null != changes && null != changes.files && null != changes.files.file)
+                //{
+                //    foreach (var changedFile in changes.files.file)
+                //    {
+                //        Console.WriteLine(changedFile.ToString());
+                //        var lvi2 = new ListViewItem(System.IO.Path.GetFileName(changedFile.file));
+                //        lvi2.SubItems.Add(changedFile.file);
+                //        lvChangedFiles.Items.Add(lvi2);
+                //    }
+                //}
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+        private BuildDetails GetBuildDetails(int buildId)
+        {
+            var tc = new TeamCity();
+            var buildDetails = tc.GetBuildDetails(buildId);
+            return buildDetails;
+        }
+        private void DisplayBuildDetails(BuildDetails buildDetails)
+        {
+            string dateStart = buildDetails.startDate;
+            string pattern = "yyyyMMdd'T'HHmmsszzz";
+            DateTimeOffset dtoStart = DateTimeOffset.ParseExact(dateStart, pattern, CultureInfo.InvariantCulture);
+            DateTime startTimestamp = DateTime.Parse(dtoStart.LocalDateTime.ToString());
+            txtBuildDetailStarted.Text = startTimestamp.ToString();
+
+            if (!string.IsNullOrEmpty(buildDetails.finishDate))
+            {
+                string dateEnd = buildDetails.finishDate;
+                DateTimeOffset dtoEnd = DateTimeOffset.ParseExact(dateEnd, pattern, CultureInfo.InvariantCulture);
+                DateTime endTimestamp = DateTime.Parse(dtoEnd.LocalDateTime.ToString());
+                txtBuildDetailFinished.Text = endTimestamp.ToString();
+                txtBuildDetailDuration.Text = dtoEnd.Subtract(dtoStart).ToString();
+            }
+            else
+            {
+                txtBuildDetailFinished.Text = "-";
+                txtBuildDetailDuration.Text = "-";
+            }
+
+            string dateQueued = buildDetails.queuedDate.ToString();
+            DateTimeOffset dtoQueued = DateTimeOffset.ParseExact(dateQueued, pattern, CultureInfo.InvariantCulture);
+            DateTime queuedTimestamp = DateTime.Parse(dtoStart.LocalDateTime.ToString());
+            txtBuildDetailQueued.Text = queuedTimestamp.ToString();
+
+            txtBuildDetailStatus.Text = buildDetails.status;
+            var statusMessage = string.IsNullOrEmpty(buildDetails.statusText) ? "" : buildDetails.statusText;
+            txtBuildDetailStatusText.Text = statusMessage;
+            txtBuildDetailState.Text = buildDetails.state;
+            txtBuildDetailPlan.Text = buildDetails.buildTypeId;
+
+            lvChangedFiles.Items.Clear();
+
+            if (null != buildDetails.lastChanges && buildDetails.lastChanges.count > 0)
+            {
+                Console.WriteLine("Read {0} changes...", buildDetails.lastChanges.count);
+
+                txtChangeId.Text = buildDetails.lastChanges.change[0].id.ToString();
+                txtChangeVersion.Text = buildDetails.lastChanges.change[0].version;
+                txtChangeDev.Text = buildDetails.lastChanges.change[0].username;
+
+                // TODO: GetBuildFiles method
+                //foreach (var change in buildDetails.lastChanges.change)
+                //{
+                //    // changed files and assemblies
+                //    var changes = GetBuildChangeList(Convert.ToInt32(change.id));
+
+                //    if (null != changes && null != changes.files && null != changes.files.file)
+                //    {
+                //        Console.WriteLine("Read {0} changed files...", changes.files.file.Count);
+
+                //        foreach (var changedFile in changes.files.file)
+                //        {
+                //            var lvi = new ListViewItem(System.IO.Path.GetFileName(changedFile.file));
+                //            lvi.SubItems.Add(changedFile.file);
+                //            lvi.Tag = changedFile;
+                //            lvChangedFiles.Items.Add(lvi);
+                //        }
+                //    }
+                //}
+            }
+            else
+            {
+                txtChangeId.Text = "-";
+                txtChangeVersion.Text = "-";
+                txtChangeDev.Text = "-";
+            }
+        }
+
+        // get build changes
+        // https://teamcity.pfestore.com/httpAuth/app/rest/changes/id:492
+        /*
+        {
+    "id": 492,
+    "version": "5213d6fcfd96315cec46b41721b4ae7c88ee7df1",
+    "username": "rroberts",
+    "date": "20160624T205455+0000",
+    "href": "/httpAuth/app/rest/changes/id:492",
+    "webUrl": "https://teamcity.pfestore.com/viewModification.html?modId=492&personal=false",
+    "comment": "Correct version number on sql script.\n",
+    "user": {
+        "username": "rroberts",
+        "name": "Rob Roberts",
+        "id": 2,
+        "href": "/httpAuth/app/rest/users/id:2"
+    },
+    "files": {
+        "file": [
+            {
+                "before-revision": "a3b718b2776bad7a82041e5b1c981b889334b9ad",
+                "after-revision": "5213d6fcfd96315cec46b41721b4ae7c88ee7df1",
+                "file": "src/AdvUpgrade/AdvUpgrade/16.4/16.4.26/NotifyEventHistory.16.4.100.sql",
+                "relative-file": "src/AdvUpgrade/AdvUpgrade/16.4/16.4.26/NotifyEventHistory.16.4.100.sql"
+            },
+            {
+                "before-revision": "a3b718b2776bad7a82041e5b1c981b889334b9ad",
+                "after-revision": "5213d6fcfd96315cec46b41721b4ae7c88ee7df1",
+                "file": "src/AdvUpgrade/AdvUpgrade/16.4/16.4.26/NotifyEventHistory.16.4.26.sql",
+                "relative-file": "src/AdvUpgrade/AdvUpgrade/16.4/16.4.26/NotifyEventHistory.16.4.26.sql"
+            },
+            {
+                "before-revision": "a3b718b2776bad7a82041e5b1c981b889334b9ad",
+                "after-revision": "5213d6fcfd96315cec46b41721b4ae7c88ee7df1",
+                "file": "src/AdvUpgrade/AdvUpgrade/AdvUpgrade.vbproj",
+                "relative-file": "src/AdvUpgrade/AdvUpgrade/AdvUpgrade.vbproj"
+            }
+        ]
+    },
+    "vcsRootInstance": {
+        "id": "3",
+        "vcs-root-id": "Advantage_HttpsGithubComCenterEdgeAdvantageGitRefsHeadsDevelop",
+        "name": "https://github.com/CenterEdge/Advantage.git#refs/heads/develop",
+        "href": "/httpAuth/app/rest/vcs-root-instances/id:3"
+    }
+}
+    */
+        //private BuildChanges GetBuildChanges(int changeId)
+        //{
+        //    var tc = new TeamCity();
+        //    var buildChanges = tc.GetBuildChanges(changeId);
+        //    return buildChanges;
+        //}
+
+        private IList<BuildChange> GetBuildChangeList(int changeId)
+        {
+            var tc = new TeamCity();
+            var buildChanges = tc.GetBuildChangeList(changeId);
+            return buildChanges;
+        }
+
+        // hide build details
+        private void btnHideBuildDetails_Click(object sender, EventArgs e)
+        {
+            HideBuildDetails();
+        }
+        private void buildDetailsToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                pnlBuildDetails.Visible = buildDetailsToolStripMenuItem.Checked;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+        private void HideBuildDetails()
+        {
+            try
+            {
+                buildDetailsToolStripMenuItem.Checked = false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+        #endregion
+        #endregion
+
+        #region GitHub             
+        private void changedFilesToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                pnlChangesDisplay.Visible = changedFilesToolStripMenuItem.Checked;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+        private async void UpdateCommitDetails()
+        {
+            if (lvWork.SelectedItems.Count == 0) return;
+
+            WorkItemView workItem = (WorkItemView)lvWork.SelectedItems[0].Tag;
+
+            await UpdateCommits(workItem);
+        }
+        private async void UpdateCommitDetails(WorkItemView workItem)
+        {
+            await UpdateCommits(workItem);
+        }
+        private async Task UpdateCommits(WorkItemView workItem)
+        {
+            try
+            {
+                SetAppStatusDisplay("Reading commits from GitHub...");
+                var pullRequestTask = await _gitHubRepoHelper.GetPullRequestDetails(workItem.GitHubIssue.Number);
+
+                if (null == pullRequestTask) return;
+
+                var commitTask = await _gitHubRepoHelper.GetCommits("ADVANTAGE", pullRequestTask.Head.Sha);
+
+
+
+
+                if (null != commitTask)
+                {
+                    if (!workItem.Commits.Any(c => c.Sha == commitTask.Sha))
+                    {
+                        workItem.Commits.Add(commitTask);
+
+                        workItem.HasDbUpgrade = commitTask.Files.Any(f => f.Filename.Contains("AdvUpgrade"));
+                        workItem.HasBuildScriptChange = commitTask.Files.Any(f => f.Filename.Contains("build.ps1"));
+
+                        workItem.FilesChanged = commitTask.Files.Select(f => f.Filename).ToList();
+
+                        var advantagePatchBuilder = new ChangedAssembyHelper(workItem.FilesChanged, "ADVANTAGE", "rroberts");
+                        workItem.AssembliesChanged = advantagePatchBuilder.AssemblyFiles;
+                    }
+                }
+
+                Console.WriteLine("Read {0} commits", workItem.Commits.Count);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+        private void DisplayCommitDetails(IList<Octokit.GitHubCommit> commits)
+        {
+            lvCommits.Items.Clear();
+            txtCommitDescription.Clear();
+
+            foreach (var commit in commits)
+            {
+                DisplayCommitDetails(commit);
+            }
+            if (commits.Count > 0)
+            {
+                lvCommits.SelectedIndices.Clear();
+                lvCommits.SelectedIndices.Add(0);
+            }
+        }
+        private void DisplayCommitDetails(Octokit.GitHubCommit commitTask)
+        {
+            var lvi = new ListViewItem(
+                  new string[] {
+                            commitTask.Sha.Substring(0,8),
+                            commitTask.Commit.Message
+                      });
+            lvi.Tag = commitTask;
+            lvCommits.Items.Add(lvi);
+        }
+        private void lvCommits_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtCommitDescription.Clear();
+            if (lvCommits.SelectedItems.Count == 0) return;
+            var selectedCommit = (Octokit.GitHubCommit)lvCommits.SelectedItems[0].Tag;
+            txtCommitDescription.Text = selectedCommit.Commit.Message;
+        }
+        private void DisplayFilesAndAssembliesChanged(WorkItemView workItem)
+        {
+            lvChangedAssemblies.Items.Clear();
+
+            foreach (var assemblyName in workItem.AssembliesChanged)
+            {
+                var lvi = new ListViewItem(assemblyName);
+                lvChangedAssemblies.Items.Add(lvi);
+            }
+
+            lvChangedFiles.Items.Clear();
+
+            foreach (var fileName in workItem.FilesChanged)
+            {
+                var lvi2 = new ListViewItem(System.IO.Path.GetFileName(fileName));
+                lvi2.SubItems.Add(fileName);
+                lvChangedFiles.Items.Add(lvi2);
+            }
+        }
+
         #region pull requests
         #region pull request grid
         private void pnlGridOptions_VisibleChanged(object sender, EventArgs e)
@@ -248,11 +895,16 @@ namespace CECodeManager
         {
             try
             {
+                SetAppStatusDisplay("Updating pull requests...");
                 UpdateWorkItemGrid();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
+            }
+            finally
+            {
+                SetAppStatusDisplay("Ready");
             }
         }
 
@@ -273,21 +925,60 @@ namespace CECodeManager
                 _workItems.Add(workItem);
             }
 
-            //foreach (var item in _workItems)
-            //{
-            //    UpdateCommits(item);
-            //}
+            UpdateJIRAPropertiesOnWorkItems(_workItems);
 
-            UpdateWorkItemsFromJira(_workItems);
+            _filteredWorkItems = FilterWorkItems(_workItems);
 
-            RefreshWorkItemsDisplay();
+            RefreshWorkItemsDisplay(_filteredWorkItems);
         }
 
         private void RefreshWorkItemsDisplay()
         {
-            DisplayWorkItems(_workItems, _pullRequestFilter, _pullRequestGroup, _pullRequestSort);
+            _filteredWorkItems = FilterWorkItems(_workItems);
+            DisplayWorkItems(_filteredWorkItems, _pullRequestFilter, _pullRequestGroup, _pullRequestSort);
         }
 
+        private void RefreshWorkItemsDisplay(IList<WorkItemView> workItems)
+        {
+            DisplayWorkItems(workItems, _pullRequestFilter, _pullRequestGroup, _pullRequestSort);
+        }
+
+        private IList<WorkItemView> FilterWorkItems(IList<WorkItemView> workItems)
+        {
+            var filteredRequests = new List<WorkItemView>();
+
+            if (null != workItems && workItems.Count > 0)
+            {
+                var pullRequestStatusDisplayList = new List<ItemState>();
+                if (_pullRequestFilter.HasFlag(PullRequestFilter.ShowPullOpen))
+                    pullRequestStatusDisplayList.Add(ItemState.Open);
+                if (_pullRequestFilter.HasFlag(PullRequestFilter.ShowPullClosed))
+                    pullRequestStatusDisplayList.Add(ItemState.Closed);
+
+                var teamDisplayList = new List<string>();
+                if (_pullRequestFilter.HasFlag(PullRequestFilter.ShowAMS))
+                    teamDisplayList.Add("AMS");
+                if (_pullRequestFilter.HasFlag(PullRequestFilter.ShowRD))
+                    teamDisplayList.Add("R&D");
+
+                var jiraStatusDisplayList = new List<string>();
+                if (_pullRequestFilter.HasFlag(PullRequestFilter.ShowInProgress))
+                    jiraStatusDisplayList.Add("In Progress");
+                if (_pullRequestFilter.HasFlag(PullRequestFilter.ShowQA))
+                    jiraStatusDisplayList.Add("QA");
+                if (_pullRequestFilter.HasFlag(PullRequestFilter.ShowApproved))
+                    jiraStatusDisplayList.Add("QA Approved");
+
+                filteredRequests = workItems.Where(w =>
+                    pullRequestStatusDisplayList.Contains(w.GitHubIssue.State) &&
+                    teamDisplayList.Contains(w.CETeam) &&
+                    jiraStatusDisplayList.Contains(w.JiraStatus.ToString())).ToList();
+            }
+
+            return filteredRequests;
+        }
+
+        // MAIN DISPLAY ROUTINE
         private void DisplayWorkItems(IList<WorkItemView> workItems, PullRequestFilter filter, PullRequestGroupBy groupBy, PullRequestSort sortBy)
         {
             try
@@ -299,52 +990,27 @@ namespace CECodeManager
 
                 lvWork.ShowGroups = (groupBy != PullRequestGroupBy.None);
 
-                var pullRequestStatusDisplayList = new List<ItemState>();
-                if (filter.HasFlag(PullRequestFilter.ShowPullOpen))
-                    pullRequestStatusDisplayList.Add(ItemState.Open);
-                if (filter.HasFlag(PullRequestFilter.ShowPullClosed))
-                    pullRequestStatusDisplayList.Add(ItemState.Closed);
-
-                var teamDisplayList = new List<string>();
-                if (filter.HasFlag(PullRequestFilter.ShowAMS))
-                    teamDisplayList.Add("AMS");
-                if (filter.HasFlag(PullRequestFilter.ShowRD))
-                    teamDisplayList.Add("R&D");
-
-                var jiraStatusDisplayList = new List<string>();
-                if (filter.HasFlag(PullRequestFilter.ShowInProgress))
-                    jiraStatusDisplayList.Add("In Progress");
-                if (filter.HasFlag(PullRequestFilter.ShowQA))
-                    jiraStatusDisplayList.Add("QA");
-                if (filter.HasFlag(PullRequestFilter.ShowApproved))
-                    jiraStatusDisplayList.Add("QA Approved");
-
-                var filteredRequests = workItems.Where(w =>
-                    pullRequestStatusDisplayList.Contains(w.GitHubIssue.State) &&
-                    teamDisplayList.Contains(w.CETeam) &&
-                    jiraStatusDisplayList.Contains(w.JiraStatus.ToString()));
-
                 IOrderedEnumerable<WorkItemView> sortedRequests = null;
                 switch (sortBy)
                 {
                     case PullRequestSort.Status:
                         {
-                            sortedRequests = filteredRequests.OrderBy(w => w.GitHubIssue.State.ToString()).ThenBy(w => w.GitHubIssue.Number);
+                            sortedRequests = _filteredWorkItems.OrderBy(w => w.GitHubIssue.State.ToString()).ThenBy(w => w.GitHubIssue.Number);
                             break;
                         }
                     case PullRequestSort.Developer:
                         {
-                            sortedRequests = filteredRequests.OrderBy(w => w.GitHubIssue.User.Login).ThenBy(w => w.GitHubIssue.Number);
+                            sortedRequests = _filteredWorkItems.OrderBy(w => w.GitHubIssue.User.Login).ThenBy(w => w.GitHubIssue.Number);
                             break;
                         }
                     case PullRequestSort.Team:
                         {
-                            sortedRequests = filteredRequests.OrderBy(w => w.CETeam);
+                            sortedRequests = _filteredWorkItems.OrderBy(w => w.CETeam);
                             break;
                         }
                     case PullRequestSort.Id:
                         {
-                            sortedRequests = filteredRequests.OrderBy(w => w.GitHubIssue.Number);
+                            sortedRequests = _filteredWorkItems.OrderBy(w => w.GitHubIssue.Number);
                             break;
                         }
                 }
@@ -423,6 +1089,7 @@ namespace CECodeManager
                             lvWork.Groups.Add(newGroup);
                         }
 
+                        UpdateCommitDetails(item);
                     }
 
                     lvWork.Items.Add(lvi);
@@ -436,24 +1103,56 @@ namespace CECodeManager
 
         private void lvWork_DoubleClick(object sender, EventArgs e)
         {
-            ShowWorkItemBuilds();
-            UpdateCommitDetails();
-        }
-
-        private void ShowWorkItemBuilds()
-        {
             try
             {
                 if (lvWork.SelectedItems.Count == 0) return;
 
                 WorkItemView workItem = (WorkItemView)lvWork.SelectedItems[0].Tag;
 
+                SetAppStatusDisplay("Updating status...");
+                UpdateWorkItem(workItem);
+
+                SetAppStatusDisplay("Updating display...");
+                DisplayWorkItem(workItem);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            finally
+            {
+                SetAppStatusDisplay("Ready");
+            }
+
+        }
+
+        private void UpdateWorkItem(WorkItemView workItem)
+        {
+            UpdateJIRAPropertiesOnWorkItem(workItem);
+            UpdateCommitDetails(workItem);
+            UpdateWorkItemBuilds(workItem);
+        }
+
+        private void DisplayWorkItem(WorkItemView workItem)
+        {
+            DisplayJIRAIssue(workItem, true);
+            DisplayCommitDetails(workItem.Commits);
+            DisplayRunningBuilds(workItem.RunningBuilds, true);
+            DisplayBuilds(workItem.Builds, false);
+            DisplayFilesAndAssembliesChanged(workItem);
+        }
+
+        private void UpdateWorkItemBuilds(WorkItemView workItem)
+        {
+            try
+            {
                 var branchName = string.Format("{0}/merge", workItem.GitHubIssue.Number);
-
-                ShowRunningBuilds(branchName, true);
-
-                var completedBuilds = GetBuildsByBranch(branchName);
-                DisplayBuilds(completedBuilds, false);
+                workItem.RunningBuilds = GetRunningBuilds(branchName);
+                Console.WriteLine("Read {0} running builds", workItem.RunningBuilds.Count);
+                workItem.Builds = GetBuildsByBranch(branchName);
+                var buildCount = null != workItem.Builds ? workItem.Builds.Count : 0;
+                Console.WriteLine("Read {0} completed builds", buildCount);
             }
             catch (Exception ex)
             {
@@ -536,7 +1235,7 @@ namespace CECodeManager
                     int tagValue = Convert.ToInt32(selected.Tag.ToString());
                     _pullRequestGroup = (PullRequestGroupBy)tagValue;
 
-                    RefreshWorkItemsDisplay();
+                    RefreshWorkItemsDisplay(_filteredWorkItems);
                 }
             }
             catch (Exception ex)
@@ -565,7 +1264,7 @@ namespace CECodeManager
                     int tagValue = Convert.ToInt32(selected.Tag.ToString());
                     _pullRequestSort = (PullRequestSort)tagValue;
 
-                    RefreshWorkItemsDisplay();
+                    RefreshWorkItemsDisplay(_filteredWorkItems);
                 }
             }
             catch (Exception ex)
@@ -576,453 +1275,35 @@ namespace CECodeManager
         #endregion
         #endregion
         #endregion
-
-        #region builds
-        private void btnHideBuildsPanel_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                buildDetailsToolStripMenuItem.Checked = false;
-                teamCityBuildsToolStripMenuItem.Checked = false;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-        }
-        private void teamCityBuildsToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                bool isChecked = ((ToolStripMenuItem)sender).Checked;
-                this.pnlTeamCity.Visible = isChecked;
-                buildDetailsToolStripMenuItem.Checked = isChecked;
-                buildDetailsToolStripMenuItem.Enabled = isChecked;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-        }
-        // get running builds button
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void ShowRunningBuilds()
-        {
-            ShowRunningBuilds(null, true);
-        }
-        private void ShowRunningBuilds(string branchName, bool clearGrid)
-        {
-            try
-            {
-                var runningBuilds = GetRunningBuilds();
-
-                List<RunningBuild.Build> filteredRunningBuilds = new List<RunningBuild.Build>();
-
-                if (String.IsNullOrEmpty(branchName))
-                {
-                    filteredRunningBuilds.AddRange(runningBuilds);
-                }
-                else
-                {
-                    foreach (var build in runningBuilds)
-                    {
-                        if (build.branchName == branchName)
-                            filteredRunningBuilds.Add(build);
-                    }
-                }
-
-                DisplayRunningBuilds(filteredRunningBuilds, clearGrid);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-        }
-        private IList<RunningBuild.Build> GetRunningBuilds()
-        {
-            var tc = new TeamCity();
-            var builds = tc.GetRunningBuilds();
-            return builds;
-        }
-        private void DisplayRunningBuilds(IList<RunningBuild.Build> builds)
-        {
-            DisplayRunningBuilds(builds, true);
-        }
-        private void DisplayRunningBuilds(IList<RunningBuild.Build> builds, bool clearGrid)
-        {
-            if (clearGrid) lvBuilds.Items.Clear();
-
-            if (null == builds || builds.Count == 0) return;
-
-            foreach (var item in builds)
-            {
-                var lvi = new ListViewItem(
-                    new string[] {
-                            item.id.ToString() ,
-                            item.percentageComplete.ToString(),
-                            item.number,
-                            item.branchName,
-                            item.status,
-                            item.state,
-                            item.buildTypeId
-                        });
-                lvi.Tag = item;
-                lvBuilds.Items.Add(lvi);
-            }
-
-            lvBuilds.SelectedIndices.Add(0);
-            ShowBuildDetails();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var builds = GetBuilds();
-
-                DisplayBuilds(builds);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-        }
-        private IList<Build> GetBuilds()
-        {
-            var tc = new TeamCity();
-            var builds = tc.GetBuilds();
-            return builds;
-        }
-        private void DisplayBuilds(IList<Build> builds)
-        {
-            DisplayBuilds(builds, true);
-        }
-        private void DisplayBuilds(IList<Build> builds, bool clearGrid)
-        {
-            if (clearGrid) lvBuilds.Items.Clear();
-
-            if (null == builds || builds.Count == 0) return;
-
-            foreach (var item in builds)
-            {
-                var lvi = new ListViewItem(
-                    new string[] {
-                            item.id.ToString() ,
-                            "Done",
-                            item.number,
-                            item.branchName,
-                            item.status,
-                            item.state,
-                            item.buildTypeId,
-                        });
-                lvi.Tag = item;
-                lvBuilds.Items.Add(lvi);
-            }
-
-            lvBuilds.SelectedIndices.Add(0);
-            ShowBuildDetails();
-        }
-
-        // get builds by branch button
-        private void button3_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var builds = GetBuildsByBranch();
-
-                DisplayBuilds(builds);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-        }
-        private IList<Build> GetBuildsByBranch()
-        {
-            var builds = GetBuildsByBranch(txtPullRequestNumber.Text);
-            return builds;
-        }
-        private IList<Build> GetBuildsByBranch(string branch)
-        {
-            var tc = new TeamCity();
-            var builds = tc.GetBranchBuilds(branch);
-            return builds;
-        }
-
-        // get patch builds by branch button
-        private void button4_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var builds = GetPatchBuildsByBranch();
-
-                DisplayBuilds(builds);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-        }
-        private IList<Build> GetPatchBuildsByBranch()
-        {
-            return GetPatchBuildsByBranch(txtPullRequestNumber.Text);
-        }
-        private IList<Build> GetPatchBuildsByBranch(string branch)
-        {
-            var tc = new TeamCity();
-            var builds = tc.GetPatchBuilds(branch);
-            return builds;
-        }
-
-        // show build details
-        private void lvBuilds_DoubleClick(object sender, EventArgs e)
-        {
-            ShowBuildDetails();
-        }
-        private void ShowBuildDetails()
-        {
-            try
-            {
-                pnlBuildDetails.Visible = true;
-
-                if (lvBuilds.SelectedItems.Count == 0) return;
-
-                var selected = lvBuilds.SelectedItems[0].Tag;
-
-                string selectedBuildId = string.Empty;
-
-                if (selected is Build)
-                {
-                    selectedBuildId = ((Build)selected).id.ToString();
-                }
-                else if (selected is RunningBuild.Build)
-                {
-                    selectedBuildId = ((RunningBuild.Build)selected).id.ToString();
-                }
-
-                BuildDetails buildDetails = GetBuildDetails(selectedBuildId);
-
-                DisplayBuildDetails(buildDetails);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-        }
-        private BuildDetails GetBuildDetails(string buildNumber)
-        {
-            var tc = new TeamCity();
-            var buildDetails = tc.GetPatchBuildDetails(buildNumber);
-            return buildDetails;
-        }
-        private void DisplayBuildDetails(BuildDetails buildDetails)
-        {
-            string dateStart = buildDetails.startDate;
-            string pattern = "yyyyMMdd'T'HHmmsszzz";
-            DateTimeOffset dtoStart = DateTimeOffset.ParseExact(dateStart, pattern, CultureInfo.InvariantCulture);
-            DateTime startTimestamp = DateTime.Parse(dtoStart.LocalDateTime.ToString());
-            txtBuildDetailStarted.Text = startTimestamp.ToString();
-
-            if (!string.IsNullOrEmpty(buildDetails.finishDate))
-            {
-                string dateEnd = buildDetails.finishDate;
-                DateTimeOffset dtoEnd = DateTimeOffset.ParseExact(dateEnd, pattern, CultureInfo.InvariantCulture);
-                DateTime endTimestamp = DateTime.Parse(dtoEnd.LocalDateTime.ToString());
-                txtBuildDetailFinished.Text = endTimestamp.ToString();
-                txtBuildDetailDuration.Text = dtoEnd.Subtract(dtoStart).ToString();
-            }
-            else
-            {
-                txtBuildDetailFinished.Text = "-";
-                txtBuildDetailDuration.Text = "-";
-            }
-
-            txtBuildDetailStatus.Text = buildDetails.status;
-            txtBuildDetailState.Text = buildDetails.state;
-            txtBuildDetailPlan.Text = buildDetails.buildTypeId;
-        }
-
-        // hide build details
-        private void btnHideBuildDetails_Click(object sender, EventArgs e)
-        {
-            HideBuildDetails();
-        }
-        private void buildDetailsToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                pnlBuildDetails.Visible = buildDetailsToolStripMenuItem.Checked;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-        }
-        private void HideBuildDetails()
-        {
-            try
-            {
-                buildDetailsToolStripMenuItem.Checked = false;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-        }
-
-
-
         #endregion
 
-        #region commits
-        private void updateCommitPropertiesToolStripMenuItem_Click(object sender, EventArgs e)
+        #region JIRA    
+        private void UpdateJIRAPropertiesOnWorkItems(IList<WorkItemView> workItems)
+        {
+            foreach (var workItem in workItems)
+            {
+                UpdateJIRAPropertiesOnWorkItem(workItem);
+            }
+        }
+        private void UpdateJIRAPropertiesOnWorkItem(WorkItemView workItem)
         {
             try
             {
-                if (lvWork.SelectedItems.Count > 0)
-                {
-                    var selected = ((WorkItemView)lvWork.SelectedItems[0].Tag);
-                    UpdateCommits(selected);
-                }
-                else
-                {
-                    foreach (var item in _workItems)
-                    {
-                        UpdateCommits(item);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-        }
-        private void btnHideChangedFiles_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                changedFilesToolStripMenuItem.Checked = false;
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-        }
-
-        private void changedFilesToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                pnlChangedFiles.Visible = changedFilesToolStripMenuItem.Checked;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-        }
-        private async void UpdateCommitDetails()
-        {
-            if (lvWork.SelectedItems.Count == 0) return;
-
-            WorkItemView workItem = (WorkItemView)lvWork.SelectedItems[0].Tag;
-
-            await UpdateCommits(workItem);
-        }
-        private async Task UpdateCommits(WorkItemView workItem)
-        {
-            var pullRequestTask = await _gitHubRepoHelper.GetPullRequestDetails(workItem.GitHubIssue.Number);
-
-            if (null == pullRequestTask) return;
-
-            var commitTask = await _gitHubRepoHelper.GetCommits("ADVANTAGE", pullRequestTask.Head.Sha);
-
-            if (null != commitTask)
-            {
-                workItem.Commits.Add(commitTask);
-
-                workItem.HasDbUpgrade = commitTask.Files.Any(f => f.Filename.Contains("AdvUpgrade"));
-                workItem.HasBuildScriptChange = commitTask.Files.Any(f => f.Filename.Contains("build.ps1"));
-
-                workItem.FilesChanged = commitTask.Files.Select(f => f.Filename).ToList();
-
-                var advantagePatchBuilder = new ChangedAssembyHelper(workItem.FilesChanged, "ADVANTAGE", "rroberts");
-                workItem.AssembliesChanged = advantagePatchBuilder.AssemblyFiles;
-
-                DisplayCommitDetails(commitTask);
-            }
-
-            DisplayFilesAndAssembliesChanged(workItem);
-        }
-
-        private void DisplayCommitDetails(Octokit.GitHubCommit commitTask)
-        {
-            lvCommits.Items.Clear();
-
-            var lvi = new ListViewItem(
-                  new string[] {
-                            commitTask.Sha.Substring(0,8),
-                            commitTask.Commit.Message
-                      });
-
-            lvCommits.Items.Add(lvi);
-
-        }
-
-        private void DisplayFilesAndAssembliesChanged(WorkItemView workItem)
-        {
-            lvChangedAssemblies.Items.Clear();
-
-            foreach (var assemblyName in workItem.AssembliesChanged)
-            {
-                var lvi = new ListViewItem(assemblyName);
-                lvChangedAssemblies.Items.Add(lvi);
-            }
-
-            lvChangedFiles.Items.Clear();
-
-            foreach (var fileName in workItem.FilesChanged)
-            {
-                var lvi = new ListViewItem(fileName);
-                lvChangedFiles.Items.Add(lvi);
-            }
-        }
-        #endregion
-
-        #region JIRA
-        private void updateJIRAPropertiesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            UpdateWorkItemsFromJira(_workItems);
-        }
-        private void UpdateWorkItemsFromJira(IList<WorkItemView> workItems)
-        {
-            try
-            {
-                foreach (var workItem in workItems)
-                {
-                    UpdateWorkItemFromJira(workItem);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-        }
-        private void UpdateWorkItemFromJira(WorkItemView workItem)
-        {
-            try
-            {
+                SetAppStatusDisplay("Reading issue from Jira...");
                 workItem.JiraIssues = GetJiraIssues(workItem.GitHubIssue, workItem.RepositoryName);
-
+                Console.WriteLine("Read {0} JIRA issues", workItem.JiraIssues.Count);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
+            finally
+            {
+                SetAppStatusDisplay("JIRA update complete");
+
+            }
         }
+
         IList<Atlassian.Jira.Issue> GetJiraIssues(Octokit.Issue request, string repoName)
         {
             var jiraIssues = new List<Atlassian.Jira.Issue>();
@@ -1043,7 +1324,7 @@ namespace CECodeManager
             {
                 titleAndBody += request.Body;
             }
-            var jiraIssueNumbers = GetJiraIssueNumbers(titleAndBody);
+            var jiraIssueNumbers = JiraIssueHelper.GetJiraIssueNumbers(titleAndBody);
             foreach (var jiraIssueNumber in jiraIssueNumbers)
             {
                 try
@@ -1063,73 +1344,54 @@ namespace CECodeManager
             return jiraIssues;
         }
 
-        IList<string> _jiraIssuePrefixes = new List<string>() { "ADVANTAGE", "WEB", "SITEINFO", "ONLINE", "MOBILEINV", "MOBILETIK" };
-        IList<string> GetJiraIssueNumbers(string body)
+        // Display JIRA issues
+        //private void DisplayJIRAIssues(IList<WorkItemView> workItems)
+        //{
+        //    lvJira.Items.Clear();
+
+        //    foreach (var workItem in workItems)
+        //    {
+        //        DisplayJIRAIssue(workItem);
+        //    }
+        //}
+        private void DisplayJIRAIssue(WorkItemView workItem)
         {
-            var issueNumbers = new List<string>();
-
-            foreach (var repoName in _jiraIssuePrefixes)
+            DisplayJIRAIssue(workItem, true);
+        }
+        private void DisplayJIRAIssue(WorkItemView workItem, bool clearGrid)
+        {
+            try
             {
-                var tokenLength = repoName.Length;
+                if (clearGrid) lvJira.Items.Clear();
 
-                body = body.ToUpper();
-
-                if (body.Contains(repoName))
+                foreach (var jiraIssue in workItem.JiraIssues)
                 {
-                    for (int i = 0; i < body.Length - tokenLength; i++)
+                    var epicName = "";
+                    if (null != jiraIssue.Components && jiraIssue.Components.Count > 0)
                     {
-                        if (body.Substring(i, tokenLength) == repoName)
-                        {
-                            var issueNumberBuffer = String.Empty;
-                            var nextIdx = 0;
-                            // add 1 for the '-' character. (Sometimes it is a different character, so we don't hard-code it.)
-                            var textSection = body.Substring(i + tokenLength + 1);
-                            while (GetNumberValue(textSection, ref issueNumberBuffer, ref nextIdx))
-                            {
-                                if (!issueNumbers.Contains(issueNumberBuffer) && !String.IsNullOrEmpty(issueNumberBuffer))
-                                {
-                                    //issueNumbers.Add(issueNumberBuffer);
-                                    issueNumbers.Add(String.Format("{0}-{1}", repoName, issueNumberBuffer));
-                                }
-
-                                if ("," == body.Substring(nextIdx + i + tokenLength - 1, 1))
-                                {
-                                    textSection = body.Substring(nextIdx + i + tokenLength);
-                                }
-                                else
-                                {
-                                    break;
-                                }
-                            }
-                        }
+                        epicName = jiraIssue.Components[0].Name;
                     }
+
+                    var lvi = new ListViewItem(
+                        new string[] {
+                            jiraIssue.Key.ToString() ,
+                            workItem.CETeam,
+                            jiraIssue.Summary,
+                            jiraIssue.Status.ToString(),
+                            workItem.FixVersions,
+                            jiraIssue.Priority.Name,
+                            jiraIssue.Type.Name, // issue type
+                            epicName // epic
+                            });
+                    lvi.Tag = jiraIssue;
+                    lvJira.Items.Add(lvi);
                 }
             }
-
-            return issueNumbers.Where(i => !String.IsNullOrEmpty(i)).ToList();
-        }
-
-        bool GetNumberValue(string buffer, ref string numberValue, ref int nextIdx)
-        {
-            int digitLength = 0;
-            for (int i = 0; i < buffer.Length; i++)
+            catch (Exception ex)
             {
-                var digitBuffer = buffer.Substring(i, 1);
-                if (digitBuffer != " ")
-                {
-                    if (!digitBuffer.All(Char.IsDigit))
-                    {
-                        numberValue = buffer.Substring(i - digitLength, digitLength).Trim();
-                        nextIdx = i + 1;
-                        return true;
-                    }
-                }
-                digitLength++;
+                Console.WriteLine(ex.ToString());
             }
-            return false;
         }
-
-
         #endregion
 
         #region accounts
@@ -1156,5 +1418,15 @@ namespace CECodeManager
         }
 
         #endregion
+
+        private async void treeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //var t = await _gitHubRepoHelper.GetTree("ADVANTAGE", "b952a1f6d474d4f18d0a6a347627ef966d3fe07d");
+
+            //var c = await _gitHubRepoHelper.Compare("ADVANTAGE", "b952a1f6d474d4f18d0a6a347627ef966d3fe07d", "develop");
+           // var m = await _gitHubRepoHelper.Compare("ADVANTAGE", "e6684f89a0f806a7722650f789b0668ca9d546cd", "master");
+            var c = await _gitHubRepoHelper.Compare("ADVANTAGE", "e6684f89a0f806a7722650f789b0668ca9d546cd", "develop");
+            // e6684f89a0f806a7722650f789b0668ca9d546cd
+        }
     }
 }
